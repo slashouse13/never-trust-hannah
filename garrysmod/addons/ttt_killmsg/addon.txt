@@ -1,0 +1,12 @@
+"AddonInfo"
+ {
+ 	"name"		"Killer revealer"
+ 	"version"	"1.0"
+ 	"up_date"	"27/02/2011"
+
+ 	"author_name"	"JohnnyThunders"
+ 	"author_email"	""
+ 	"author_url"	""
+
+ 	"info"		""
+ }
