@@ -18,7 +18,7 @@ function CORPSE.SetPlayerNick(rag, ply_or_name)
    -- still-connected player, and if the player is gone, fall back to nw string
    local name = ply_or_name
    if IsValid(ply_or_name) then
-      name = ply_or_name:Nick()
+      name = ply_or_name:GetDisplayName() -- NTH
       rag:SetDTEntity(dti.ENT_PLAYER, ply_or_name)
    end
 
@@ -45,7 +45,7 @@ local function IdentifyBody(ply, rag)
       return
    end
 
-   local finder = ply:Nick()
+   local finder = ply:GetDisplayName() -- NTH
    local nick = CORPSE.GetPlayerNick(rag, "")
    local traitor = (rag.was_role == ROLE_TRAITOR)
 
@@ -72,14 +72,16 @@ local function IdentifyBody(ply, rag)
       local deadply = player.GetByUniqueID(rag.uqid)
       if deadply then
          deadply:SetNWBool("body_found", true)
+		 hook.Call("IdentifyBody", GAMEMODE, deadply, true) -- NTH
 
          if traitor then
             -- update innocent's list of traitors
             SendConfirmedTraitors(GetInnocentFilter(false))
          end
+
          SCORE:HandleBodyFound(ply, deadply)
       end
-      hook.Call( "TTTBodyFound", GAMEMODE, ply, deadply, rag )
+
       CORPSE.SetFound(rag, true)
    else
       -- re-set because nwvars are unreliable
@@ -94,7 +96,7 @@ local function IdentifyBody(ply, rag)
 
       -- is this an unconfirmed dead?
       if IsValid(vic) and (not vic:GetNWBool("body_found", false)) then
-         LANG.Msg("body_confirm", {finder = finder, victim = vic:Nick()})
+         LANG.Msg("body_confirm", {finder = finder, victim = vic:GetDisplayName()}) -- NTH
 
          -- update scoreboard status
          vic:SetNWBool("body_found", true)
@@ -150,7 +152,7 @@ local function CallDetective(ply, cmd, args)
             net.WriteVector(rag:GetPos())
          net.Send(GetDetectiveFilter(true))
 
-         LANG.Msg("body_call", {player = ply:Nick(),
+         LANG.Msg("body_call", {player = ply:GetDisplayName(), -- NTH
                                 victim = CORPSE.GetPlayerNick(rag, "someone")})
 
       else

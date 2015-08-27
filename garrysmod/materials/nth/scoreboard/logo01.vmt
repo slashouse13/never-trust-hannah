@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "nth/scoreboard/logo01"
+	"$translucent" 1
+}

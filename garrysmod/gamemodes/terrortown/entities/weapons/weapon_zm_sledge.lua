@@ -5,7 +5,9 @@ SWEP.HoldType			= "crossbow"
 
 
 if CLIENT then
-   SWEP.PrintName			= "H.U.G.E-249"
+   -- NTH
+   SWEP.PrintName			= "Hammy's Big Toe"
+
    SWEP.Slot				= 2
 
    SWEP.ViewModelFlip		= false
@@ -23,7 +25,7 @@ SWEP.Kind = WEAPON_HEAVY
 SWEP.WeaponID = AMMO_M249
 
 
-SWEP.Primary.Damage = 7
+SWEP.Primary.Damage = 14 -- NTH
 SWEP.Primary.Delay = 0.06
 SWEP.Primary.Cone = 0.09
 SWEP.Primary.ClipSize = 150
@@ -32,7 +34,7 @@ SWEP.Primary.DefaultClip	= 150
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "AirboatGun"
 SWEP.AutoSpawnable      = true
-SWEP.Primary.Recoil			= 1.9
+SWEP.Primary.Recoil			= 2.4 -- NTH
 SWEP.Primary.Sound			= Sound("Weapon_m249.Single")
 
 SWEP.UseHands			= true

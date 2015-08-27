@@ -124,6 +124,7 @@ local function SetFallback(tbl)
 end
 
 function LANG.SetActiveLanguage(lang_name)
+    lang_name = (NTH and NTH.DefaultServerLanguage) or lang_name -- NTH
    lang_name = lang_name and string.lower(lang_name)
 
    if LANG.IsLanguage(lang_name) then

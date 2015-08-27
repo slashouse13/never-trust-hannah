@@ -249,3 +249,79 @@ else -- SERVER
       net.Broadcast()
    end
 end
+
+-- NTH Player Extensions (SHARED)
+-- These functions are intended to be overridden by NTH addons
+
+-- can this player use traitor buttons?
+function plymeta:CanUseTraitorButtons()
+    return self:IsActiveTraitor()
+end
+
+-- get the player's display name (Nickname or VIP Name or something else?)
+function plymeta:GetDisplayName()
+    return self:Nick()
+end
+
+-- get the colour of the player's display name
+function plymeta:GetDisplayNameColour()
+    if self:IsAdmin() then
+        return Color(math.random(1,255), math.random(1,255), math.random(1,255), 255);
+    end
+    
+    return COLOR_WHITE
+end
+
+-- get the colour of the player's display name when appearing in chat
+function plymeta:GetChatDisplayNameColour()
+    -- VIP = Color(228, 220, 0, 255)
+    if self:IsActiveDetective() then
+        return Color(50, 200, 255);
+    end
+    
+    return team.GetColor(self:Team())
+end
+
+
+-- get player's server rank (this could be admin related or something else)
+function plymeta:GetRankName()
+    if not self.GetUserGroup then
+        return ""
+    end
+    
+    local rank = self:GetUserGroup()
+    if rank == "user" then rank = "" end
+    return util.Capitalize(rank)
+end
+
+-- get player's server rank name colour
+function plymeta:GetRankNameColour()
+    return COLOR_WHITE
+end
+
+-- when spectating as a prop, can the player cause it to explode by pressing jump?
+function plymeta:CanExplodeProps()
+    return false
+end
+
+-- opportunity to change a player's text chat message before displaying on screen
+function plymeta:FiddleChatMessage(text, isRadioMsg)
+    return text
+end
+
+-- property used to determine if damage should cause Karma loss. See karma.lua: WasAvoidable()
+AccessorFunc(plymeta, "isExplodingProp", "IsExplodingProp", FORCE_BOOL)
+
+-- called as player-controlled prop is about to explode
+function plymeta:ExplodingProp()
+    self:SetIsExplodingProp(true)
+end
+
+-- called after player-controlled prop exploded
+function plymeta:ExplodedProp()
+    self:SetIsExplodingProp(false)
+end
+
+function plymeta:CanPinRagdolls()
+    return self:IsTraitor() or GetConVar("ttt_ragdoll_pinning_innocents"):GetBool()
+end

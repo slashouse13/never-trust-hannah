@@ -2,3 +2,9 @@ sourceengine/
 platform/
 bin/
 *.mdmp
+garrysmod/maps/
+garrysmod/data/ulx_logs/
+garrysmod/downloadlists/
+garrysmod/cfg/
+garrysmod/download/
+*.ztmp

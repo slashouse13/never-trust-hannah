@@ -142,20 +142,9 @@ end
 concommand.Add("ttt_print_playercount", function() print(GAMEMODE.StartingPlayers) end)
 
 --- optional sound cues on round start and end
-CreateConVar("ttt_cl_soundcues", "0", FCVAR_ARCHIVE)
 
-local cues = {
-   Sound("ttt/thump01e.mp3"),
-   Sound("ttt/thump02e.mp3")
-};
-local function PlaySoundCue()
-   if GetConVar("ttt_cl_soundcues"):GetBool() then
-      surface.PlaySound(table.Random(cues))
-   end
-end
-
-GM.TTTBeginRound = PlaySoundCue
-GM.TTTEndRound = PlaySoundCue
+-- NTH - we do our own sound cues
+CreateConVar("ttt_cl_nth_soundcues", "1", FCVAR_ARCHIVE)
 
 --- usermessages
 
@@ -168,11 +157,13 @@ local function ReceiveRole()
    if not client.SetRole then return end
 
    client:SetRole(role)
-
+   
+   --[[ NTH - Commented this out. TMI
    Msg("You are: ")
    if client:IsTraitor() then MsgN("TRAITOR")
    elseif client:IsDetective() then MsgN("DETECTIVE")
    else MsgN("INNOCENT") end
+   ]]--
 end
 net.Receive("TTT_Role", ReceiveRole)
 
@@ -204,7 +195,7 @@ local function ReceiveRoundState()
       RoundStateChange(o, GAMEMODE.round_state)
    end
 
-   MsgN("Round state: " .. GAMEMODE.round_state)
+   --MsgN("Round state: " .. GAMEMODE.round_state)
 end
 net.Receive("TTT_RoundState", ReceiveRoundState)
 
@@ -376,3 +367,6 @@ function CheckIdle()
       end
    end
 end
+
+-- NTH - Now seems like a good place to inject the Never Trust Hannah stuff
+include("nth/init_cl.lua")

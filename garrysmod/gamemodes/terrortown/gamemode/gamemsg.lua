@@ -167,7 +167,13 @@ end
 local loc_voice = CreateConVar("ttt_locational_voice", "0")
 
 -- Of course voice has to be limited as well
-function GM:PlayerCanHearPlayersVoice(listener, speaker)
+function GM:PlayerCanHearPlayersVoice( listener, speaker )
+
+   -- NTH - any reason why we can't speak?
+   if not speaker:CanUseVoiceChat() then
+      return false, false
+   end
+
    -- Enforced silence
    if mute_all then
       return false, false
@@ -338,7 +344,7 @@ local function RadioCommand(ply, cmd, args)
          local ent = Entity(tonumber(msg_target))
          if IsValid(ent) then
             if ent:IsPlayer() then
-               name = ent:Nick()
+               name = ent:GetDisplayName() -- NTH
             elseif ent:GetClass() == "prop_ragdoll" then
                name = LANG.NameParam("quick_corpse_id")
                rag_name = CORPSE.GetPlayerNick(ent, "A Terrorist")

@@ -72,7 +72,8 @@ function ENT:AcceptInput(name, activator)
 end
 
 function ENT:TraitorUse(ply)
-   if not (IsValid(ply) and ply:IsActiveTraitor()) then return false end
+   -- NTH
+   if not (IsValid(ply) and ply:CanUseTraitorButtons()) then return false end
    if not self:IsUsable() then return false end
 
    if self:GetPos():Distance(ply:GetPos()) > self:GetUsableRange() then return false end
@@ -81,6 +82,8 @@ function ENT:TraitorUse(ply)
 
    -- send output to all entities linked to us
    self:TriggerOutput("OnPressed", ply)
+   if self.OnPressed then self:OnPressed(ply) end -- NTH (easier way to add dynamic buttons)
+   hook.Call("NTH-TraitorButtonPressed", GAMEMODE, self, ply) -- NTH
 
    if self.RemoveOnPress then
       self:SetLocked(true)
@@ -96,7 +99,8 @@ end
 local function TraitorUseCmd(ply, cmd, args)
    if #args != 1 then return end
 
-   if IsValid(ply) and ply:IsActiveTraitor() then
+   -- NTH
+   if IsValid(ply) and (ply:CanUseTraitorButtons()) then
       local idx = tonumber(args[1])
       if idx then
          local ent = Entity(idx)

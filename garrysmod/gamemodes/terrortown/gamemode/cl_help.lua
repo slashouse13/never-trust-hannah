@@ -50,6 +50,14 @@ function HELPSCRN:Show()
    dsettings:SetPadding(10)
    dsettings:SetSpacing(10)
 
+   
+   local dnth = vgui.Create("DForm", dsettings)
+   dnth:SetName("Never Trust Hannah settings")
+   
+   dnth:CheckBox("Mute Kiba", "nth_kiba_mute")
+   
+   dsettings:AddItem(dnth)
+   
    --- Interface area
 
    local dgui = vgui.Create("DForm", dsettings)
@@ -96,7 +104,7 @@ function HELPSCRN:Show()
    cb = dgui:CheckBox(GetTranslation("set_wswitch"), "ttt_weaponswitcher_stay")
    cb:SetTooltip(GetTranslation("set_wswitch_tip"))
 
-   cb = dgui:CheckBox(GetTranslation("set_cues"), "ttt_cl_soundcues")
+   cb = dgui:CheckBox(GetTranslation("set_cues"), "ttt_cl_nth_soundcues") -- NTH
 
    dsettings:AddItem(dgui)
 

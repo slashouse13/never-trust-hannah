@@ -466,8 +466,8 @@ local function TransferCredits(ply, cmd, args)
       ply:SubtractCredits(credits)
       target:AddCredits(credits)
 
-      LANG.Msg(ply, "xfer_success", {player=target:Nick()})
-      LANG.Msg(target, "xfer_received", {player = ply:Nick(), num = credits})
+      LANG.Msg(ply, "xfer_success", {player=target:GetDisplayName()})
+      LANG.Msg(target, "xfer_received", {player = ply:GetDisplayName(), num = credits})
    end
 end
 concommand.Add("ttt_transfer_credits", TransferCredits)

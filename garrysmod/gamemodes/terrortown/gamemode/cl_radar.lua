@@ -36,7 +36,7 @@ end
 function RADAR:Timeout()
    self:EndScan()
 
-   if self.repeating and LocalPlayer() and (LocalPlayer():IsActiveTraitor() or LocalPlayer():IsActiveDetective()) then
+   if self.repeating and LocalPlayer() and LocalPlayer():IsActive() then -- NTH
       RunConsoleCommand("ttt_radar_scan")
    end
 end
@@ -155,7 +155,7 @@ function RADAR:Draw(client)
    end
 
    -- Player radar
-   if (not self.enable) or (not client:IsActiveSpecial()) then return end
+   if (not self.enable) or (not client:IsActive()) then return end -- NTH
 
    surface.SetTexture(indicator)
 

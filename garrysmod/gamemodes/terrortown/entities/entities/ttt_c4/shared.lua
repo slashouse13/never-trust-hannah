@@ -396,6 +396,8 @@ if SERVER then
       self:SendWarn(false)
 
       self.DisarmCausedExplosion = false
+      
+      if ply != owner then hook.Call("NTH-DisarmedC4", GAMEMODE, ply) end -- NTH
    end
 
    function ENT:FailedDisarm(ply)

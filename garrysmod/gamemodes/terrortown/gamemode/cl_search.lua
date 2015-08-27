@@ -220,8 +220,6 @@ function PreprocSearch(raw)
       end
    end
 
-   hook.Call("TTTBodySearchPopulate", nil, search, raw)
-
    return search
 end
 
@@ -487,8 +485,6 @@ local function ReceiveRagdollSearch()
    --
    local words = net.ReadString()
    search.words = (words ~= "") and words or nil
-   
-   hook.Call("TTTBodySearchEquipment", nil, search, eq)
 
    if search.show then
       ShowSearchScreen(search)

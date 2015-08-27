@@ -479,7 +479,7 @@ end
 
 function SWEP:PinRagdoll()
    if not pin_rag:GetBool() then return end
-   if (not self.Owner:IsTraitor()) and (not pin_rag_inno:GetBool()) then return end
+   if not self.Owner:CanPinRagdolls() then return end -- NTH
 
    local rag = self.EntHolding
    local ply = self.Owner

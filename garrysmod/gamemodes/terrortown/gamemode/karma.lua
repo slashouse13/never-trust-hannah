@@ -62,10 +62,14 @@ function KARMA.GetKillReward()
    return KARMA.GetHurtReward(config.tbonus:GetFloat())
 end
 
-function KARMA.GivePenalty(ply, penalty, victim)
-        if not hook.Call( "TTTKarmaGivePenalty", nil, ply, penalty, victim ) then
-                ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
-        end
+function KARMA.GivePenalty(ply, penalty)
+   ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+end
+
+-- NTH
+function KARMA.GivePenaltyRealtime(ply, penalty)
+   ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+   ply:SetBaseKarma(math.max(ply:GetBaseKarma() - penalty, 0))
 end
 
 function KARMA.GiveReward(ply, reward)
@@ -97,8 +101,27 @@ function KARMA.ApplyKarma(ply)
 end
 
 -- Return true if a traitor could have easily avoided the damage/death
-local function WasAvoidable(attacker, victim, dmginfo)
+function WasAvoidable(attacker, victim, dmginfo) -- NTH
+
+   if NTH and NTH.Round and NTH.Round.RDM then
+      return true
+   end
+
+   -- NTH - Exploding posessed props are avoidable
+   if attacker:GetIsExplodingProp() then
+      return true
+   end
+
    local infl = dmginfo:GetInflictor()
+   
+   -- NTH - Jaraxxus' fire is "avoidable"
+   if infl and IsValid(infl) then
+        local e = infl:GetParent()
+        if IsValid(e) and e:GetClass() == "ttt_flame" and e.FromJaraxxus then
+            return true
+        end
+   end
+
    if attacker:IsTraitor() and victim:IsTraitor() and IsValid(infl) and infl.Avoidable then
       return true
    end
@@ -198,13 +221,11 @@ function KARMA.RoundIncrement()
    local cleanbonus = config.clean:GetFloat()
 
    for _, ply in pairs(player.GetAll()) do
-      if ply:IsDeadTerror() and ply.death_type ~= KILL_SUICIDE or not ply:IsSpec() then
-         local bonus = healbonus + (ply:GetCleanRound() and cleanbonus or 0)
-         KARMA.GiveReward(ply, bonus)
+      local bonus = healbonus + (ply:GetCleanRound() and cleanbonus or 0)
+      KARMA.GiveReward(ply, bonus)
 
-         if IsDebug() then
-            print(ply, "gets roundincr", incr)
-         end
+      if IsDebug() then
+         print(ply, "gets roundincr", incr)
       end
    end
 
@@ -346,6 +367,11 @@ function KARMA.CheckAutoKick(ply)
          KARMA.RememberedPlayers[ply:UniqueID()] = k
       end
 
+      -- NTH
+      if ply:IsAdmin() then
+         return
+      end
+      
       if config.autoban:GetBool() then
          ply:KickBan(config.bantime:GetInt(), reason)
       else

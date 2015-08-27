@@ -11,7 +11,7 @@ local function LastWordsRecv()
    local words  = net.ReadString()
 
    local was_detective = IsValid(sender) and sender:IsDetective()
-   local nick = IsValid(sender) and sender:Nick() or "<Unknown>"
+   local nick = IsValid(sender) and sender:GetDisplayName() or "<Unknown>" -- NTH
 
    chat.AddText(Color( 150, 150, 150 ),
                 Format("(%s) ", string.upper(GetTranslation("last_words"))),
@@ -34,7 +34,7 @@ local function RoleChatRecv()
       chat.AddText(Color( 255, 30, 40 ),
                    Format("(%s) ", string.upper(GetTranslation("traitor"))),
                    Color( 255, 200, 20),
-                   sender:Nick(),
+                   sender:GetDisplayName(), -- NTH
                    Color( 255, 255, 200),
                    ": " .. text)
 
@@ -42,7 +42,7 @@ local function RoleChatRecv()
       chat.AddText(Color( 20, 100, 255 ),
                    Format("(%s) ", string.upper(GetTranslation("detective"))),
                    Color( 25, 200, 255),
-                   sender:Nick(),
+                   sender:GetDisplayName(), -- NTH
                    Color( 200, 255, 255),
                    ": " .. text)
    end
@@ -71,34 +71,42 @@ function GM:ChatText(idx, name, text, type)
    return BaseClass.ChatText(self, idx, name, text, type)
 end
 
-
--- Detectives have a blue name, in both chat and radio messages
-local function AddDetectiveText(ply, text)
-   chat.AddText(Color(50, 200, 255),
-                ply:Nick(),
-                Color(255,255,255),
-                ": " .. text)
+-- NTH
+-- This function is purely for cosmetics. No logic here to determine who receives what chat messages.
+function AddChatText(ply, text, teamchat, dead)
+    local tab = {}
+	
+	if (dead) then -- show "*DEAD* " in red
+		table.insert( tab, Color( 255, 30, 40 ) )
+		table.insert( tab, "*DEAD* " )
+	end
+	
+    --[[
+	if (teamchat) then -- show "(TEAM) " in green
+		table.insert( tab, Color( 30, 160, 40 ) )
+		table.insert( tab, "(TEAM) " )
+	end
+    ]]--
+	
+	if (IsValid(ply)) then -- check valid, because could be Console
+        text = ply:FiddleChatMessage(text)
+        local colour = ply:GetChatDisplayNameColour()
+        table.insert( tab, colour )
+		table.insert( tab, ply:GetDisplayName() )
+	else
+		table.insert( tab, "Console" )
+	end
+	
+	table.insert( tab, COLOR_WHITE )
+	table.insert( tab, ": "..text )
+	
+	chat.AddText(unpack(tab))
+    return true
 end
 
-function GM:OnPlayerChat(ply, text, teamchat, dead)
-   if not IsValid(ply) then return BaseClass.OnPlayerChat(self, ply, text, teamchat, dead) end 
-   
-   if ply:IsActiveDetective() then
-      AddDetectiveText(ply, text)
-      return true
-   end
-   
-   local team = ply:Team() == TEAM_SPEC
-   
-   if team and not dead then
-      dead = true
-   end
-   
-   if teamchat and ((not team and not ply:IsSpecial()) or team) then
-      teamchat = false
-   end
-
-   return BaseClass.OnPlayerChat(self, ply, text, teamchat, dead)
+-- NTH
+function GM:OnPlayerChat( ply, text, teamchat, dead )
+   return AddChatText(ply, text, teamchat, dead)
 end
 
 local last_chat = ""
@@ -280,7 +288,7 @@ function RADIO.ToPrintable(target)
       return GetTranslation(target)
    elseif IsValid(target) then
       if target:IsPlayer() then
-         return target:Nick()
+         return target:GetDisplayName()
       elseif target:GetClass() == "prop_ragdoll" then
          return GetPTranslation("quick_corpse_id", {player = CORPSE.GetPlayerNick(target, "A Terrorist")})
       end
@@ -395,13 +403,9 @@ local function RadioMsgRecv()
       text = util.Capitalize(text)
    end
 
-   if sender:IsDetective() then
-      AddDetectiveText(sender, text)
-   else
-      chat.AddText(sender,
-                   COLOR_WHITE,
-                   ": " .. text)
-   end
+   -- NTH
+   text = sender:FiddleChatMessage(text)
+   AddChatText(sender, text)
 end
 net.Receive("TTT_RadioMsg", RadioMsgRecv)
 
@@ -445,6 +449,54 @@ end
 
 local PlayerVoicePanels = {}
 
+-- NTH - separated this out. returns a nice removal function
+function g_AddPlayerVoicePanel(ply, client)
+    if not IsValid(g_VoicePanelList) or not IsValid(ply) or not IsValid(ply) then return end
+    if IsValid(PlayerVoicePanels[ply]) then return end
+
+    local pnl = g_VoicePanelList:Add("VoiceNotify")
+    pnl:Setup(ply)
+    pnl:Dock(TOP)
+    
+    local oldThink = pnl.Think
+    pnl.Think = function( self )
+                   oldThink( self )
+                   VoiceNotifyThink( self )
+                end
+
+    local shade = Color(0, 0, 0, 150)
+    pnl.Paint = function(s, w, h)
+                  if not IsValid(s.ply) then return end
+                  draw.RoundedBox(4, 0, 0, w, h, s.Color)
+                  draw.RoundedBox(4, 1, 1, w-2, h-2, shade)
+               end
+
+   if client:IsActiveTraitor() then
+      if ply == client then
+         if not client.traitor_gvoice then
+            pnl.Color = Color(200, 20, 20, 255)
+         end
+      elseif ply:IsActiveTraitor() then
+         if not ply.traitor_gvoice then
+            pnl.Color = Color(200, 20, 20, 255)
+         end
+      end
+   end
+
+   if ply:IsActiveDetective() then
+      pnl.Color = Color(20, 20, 200, 255)
+    end
+
+    PlayerVoicePanels[ply] = pnl
+    
+    return function()
+        if IsValid(pnl) then
+            pnl:Remove()
+            PlayerVoicePanels[ply] = nil
+        end
+    end
+end
+
 function GM:PlayerStartVoice( ply )
    local client = LocalPlayer()
    if not IsValid(g_VoicePanelList) or not IsValid(client) then return end
@@ -469,41 +521,8 @@ function GM:PlayerStartVoice( ply )
       VOICE.SetSpeaking(true)
    end
 
-   local pnl = g_VoicePanelList:Add("VoiceNotify")
-   pnl:Setup(ply)
-   pnl:Dock(TOP)
+   g_AddPlayerVoicePanel(ply, client) -- NTH
    
-   local oldThink = pnl.Think
-   pnl.Think = function( self )
-                  oldThink( self )
-                  VoiceNotifyThink( self )
-               end
-
-   local shade = Color(0, 0, 0, 150)
-   pnl.Paint = function(s, w, h)
-                  if not IsValid(s.ply) then return end
-                  draw.RoundedBox(4, 0, 0, w, h, s.Color)
-                  draw.RoundedBox(4, 1, 1, w-2, h-2, shade)
-               end
-
-   if client:IsActiveTraitor() then
-      if ply == client then
-         if not client.traitor_gvoice then
-            pnl.Color = Color(200, 20, 20, 255)
-         end
-      elseif ply:IsActiveTraitor() then
-         if not ply.traitor_gvoice then
-            pnl.Color = Color(200, 20, 20, 255)
-         end
-      end
-   end
-
-   if ply:IsActiveDetective() then
-      pnl.Color = Color(20, 20, 200, 255)
-   end
-
-   PlayerVoicePanels[ply] = pnl
-
    -- run ear gesture
    if not (ply:IsActiveTraitor() and (not ply.traitor_gvoice)) then
       ply:AnimPerformGesture(ACT_GMOD_IN_CHAT)

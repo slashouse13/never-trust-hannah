@@ -1,4 +1,6 @@
 
+include ( "nth/config_sh.lua" )	-- NTH, config
+
 --[[---------------------------------------------------------
 	Non-Module includes
 -----------------------------------------------------------]]
@@ -13,6 +15,7 @@ include( "extensions/net.lua" )
 	Shared Modules
 -----------------------------------------------------------]]
 
+require ( "sck" )				-- NTH, swep construction kit module
 require ( "baseclass" )
 require ( "concommand" )		-- Console Commands
 require ( "saverestore" )		-- Save/Restore

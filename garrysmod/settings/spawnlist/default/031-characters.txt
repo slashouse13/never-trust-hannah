@@ -202,225 +202,230 @@
 		}
 		"40"
 		{
-			"type"		"header"
-			"text"		"Bad guys"
+			"type"		"model"
+			"model"		"models/player/t_animations.mdl"
 		}
 		"41"
 		{
-			"type"		"model"
-			"model"		"models/player/tm_anarchist.mdl"
+			"type"		"header"
+			"text"		"Bad guys"
 		}
 		"42"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_anarchist_varianta.mdl"
+			"model"		"models/player/tm_anarchist.mdl"
 		}
 		"43"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_anarchist_variantb.mdl"
+			"model"		"models/player/tm_anarchist_varianta.mdl"
 		}
 		"44"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_anarchist_variantc.mdl"
+			"model"		"models/player/tm_anarchist_variantb.mdl"
 		}
 		"45"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_anarchist_variantd.mdl"
+			"model"		"models/player/tm_anarchist_variantc.mdl"
 		}
 		"46"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_balkan_varianta.mdl"
+			"model"		"models/player/tm_anarchist_variantd.mdl"
 		}
 		"47"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_balkan_variantb.mdl"
+			"model"		"models/player/tm_balkan_varianta.mdl"
 		}
 		"48"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_balkan_variantc.mdl"
+			"model"		"models/player/tm_balkan_variantb.mdl"
 		}
 		"49"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_balkan_variantd.mdl"
+			"model"		"models/player/tm_balkan_variantc.mdl"
 		}
 		"50"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_balkan_variante.mdl"
+			"model"		"models/player/tm_balkan_variantd.mdl"
 		}
 		"51"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_leet_varianta.mdl"
+			"model"		"models/player/tm_balkan_variante.mdl"
 		}
 		"52"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_leet_variantb.mdl"
+			"model"		"models/player/tm_leet_varianta.mdl"
 		}
 		"53"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_leet_variantc.mdl"
+			"model"		"models/player/tm_leet_variantb.mdl"
 		}
 		"54"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_leet_variantd.mdl"
+			"model"		"models/player/tm_leet_variantc.mdl"
 		}
 		"55"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_leet_variante.mdl"
+			"model"		"models/player/tm_leet_variantd.mdl"
 		}
 		"56"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_phoenix.mdl"
+			"model"		"models/player/tm_leet_variante.mdl"
 		}
 		"57"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_phoenix_varianta.mdl"
+			"model"		"models/player/tm_phoenix.mdl"
 		}
 		"58"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_phoenix_variantb.mdl"
+			"model"		"models/player/tm_phoenix_varianta.mdl"
 		}
 		"59"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_phoenix_variantc.mdl"
+			"model"		"models/player/tm_phoenix_variantb.mdl"
 		}
 		"60"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_phoenix_variantd.mdl"
+			"model"		"models/player/tm_phoenix_variantc.mdl"
 		}
 		"61"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_pirate.mdl"
+			"model"		"models/player/tm_phoenix_variantd.mdl"
 		}
 		"62"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_pirate_variantb.mdl"
+			"model"		"models/player/tm_pirate.mdl"
 		}
 		"63"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_pirate_variantc.mdl"
+			"model"		"models/player/tm_pirate_variantb.mdl"
 		}
 		"64"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_pirate_variantd.mdl"
+			"model"		"models/player/tm_pirate_variantc.mdl"
 		}
 		"65"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_professional.mdl"
+			"model"		"models/player/tm_pirate_variantd.mdl"
 		}
 		"66"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_professional_var1.mdl"
+			"model"		"models/player/tm_professional.mdl"
 		}
 		"67"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_professional_var2.mdl"
+			"model"		"models/player/tm_professional_var1.mdl"
 		}
 		"68"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_professional_var3.mdl"
+			"model"		"models/player/tm_professional_var2.mdl"
 		}
 		"69"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_professional_var4.mdl"
+			"model"		"models/player/tm_professional_var3.mdl"
 		}
 		"70"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_separatist.mdl"
+			"model"		"models/player/tm_professional_var4.mdl"
 		}
 		"71"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_separatist_varianta.mdl"
+			"model"		"models/player/tm_separatist.mdl"
 		}
 		"72"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_separatist_variantb.mdl"
+			"model"		"models/player/tm_separatist_varianta.mdl"
 		}
 		"73"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_separatist_variantd.mdl"
+			"model"		"models/player/tm_separatist_variantb.mdl"
 		}
 		"74"
 		{
 			"type"		"model"
-			"model"		"models/player/tm_separatist_variantc.mdl"
+			"model"		"models/player/tm_separatist_variantd.mdl"
 		}
 		"75"
+		{
+			"type"		"model"
+			"model"		"models/player/tm_separatist_variantc.mdl"
+		}
+		"76"
 		{
 			"type"		"header"
 			"text"		"Dumb guys"
 		}
-		"76"
+		"77"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage.mdl"
 		}
-		"77"
+		"78"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_varianta.mdl"
 		}
-		"78"
+		"79"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variantb.mdl"
 		}
-		"79"
+		"80"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variantc.mdl"
 		}
-		"80"
+		"81"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variantd.mdl"
 		}
-		"81"
+		"82"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variante.mdl"
 		}
-		"82"
+		"83"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variantf.mdl"
 		}
-		"83"
+		"84"
 		{
 			"type"		"model"
 			"model"		"models/hostage/hostage_variantg.mdl"
 		}
-		"84"
+		"85"
 		{
 			"type"		"model"
 			"model"		"models/player/zombie.mdl"

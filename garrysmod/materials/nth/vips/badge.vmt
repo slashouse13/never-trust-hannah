@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture" "nth/vips/badge"
+	"$translucent" 1
+}

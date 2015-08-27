@@ -36,8 +36,8 @@ function GM:PlayerInitialSpawn( ply )
       SendDetectiveList(ply)
    end
 
-   -- Handle spec bots
-   if ply:IsBot() and GetConVar("ttt_bots_are_spectators"):GetBool() then
+   -- Handle spec bots // NTH
+   if (ply:SteamID() == "BOT" or ply:IsBot()) and GetConVar("ttt_bots_are_spectators"):GetBool() then
       ply:SetTeam(TEAM_SPEC)
       ply:SetForceSpec(true)
    end
@@ -624,6 +624,9 @@ function GM:DoPlayerDeath(ply, attacker, dmginfo)
          DamageLog(Format("KILL:\t <something/world> killed %s [%s]", ply:Nick(), ply:GetRoleString()))
       end
 
+      -- NTH
+      hook.Call("PlayerKilled", nil, ply, attacker, dmginfo)
+      ply:KilledBy(attacker)
 
       KARMA.Killed(attacker, ply, dmginfo)
    end
@@ -813,7 +816,7 @@ function GM:OnPlayerHitGround(ply, in_water, on_floater, speed)
    if in_water or speed < 450 or not IsValid(ply) then return end
 
    -- Everything over a threshold hurts you, rising exponentially with speed
-   local damage = math.pow(0.05 * (speed - 420), 1.75)
+   local damage = ply:CalculateFallDamage(speed) -- NTH
 
    -- I don't know exactly when on_floater is true, but it's probably when
    -- landing on something that is in water.

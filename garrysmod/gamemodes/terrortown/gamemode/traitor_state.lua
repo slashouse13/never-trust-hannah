@@ -89,6 +89,7 @@ function SendFullStateUpdate()
    SendInnocentList()
    SendTraitorList(GetTraitorFilter())
    SendDetectiveList()
+   hook.Call("SendFullStateUpdate") -- NTH
    -- not useful to sync confirmed traitors here
 end
 
@@ -126,39 +127,46 @@ local function request_rolelist(ply)
 end
 concommand.Add("_ttt_request_rolelist", request_rolelist)
 
-local function force_terror(ply)
-   if cvars.Bool("sv_cheats") then
-      ply:SetRole(ROLE_INNOCENT)
-      ply:UnSpectate()
-      ply:SetTeam(TEAM_TERROR)
+-- NTH
+concommand.Add("ttt_force_terror", function(ply)
+    if cvars.Bool("sv_cheats") or ply:IsSuperAdmin() then
+        ply:SetRole(ROLE_INNOCENT)
+        ply:UnSpectate()
+        ply:SetTeam(TEAM_TERROR)
+        ply:StripAll()
+        ply:Spawn()
+        SendFullStateUpdate()
+        ulx.fancyLogAdmin(ply, "#A respawned as an innocent")
+    end
+end)
 
-      ply:StripAll()
+-- NTH
+concommand.Add("ttt_force_traitor", function(ply)
+    if cvars.Bool("sv_cheats") or ply:IsSuperAdmin() then
+        ply:SetRole(ROLE_TRAITOR)
+        ply:UnSpectate()
+        ply:SetTeam(TEAM_TERROR)
+        ply:StripAll()
+        ply:Spawn()
+        ply:AddCredits(10)
+        SendFullStateUpdate()
+        ulx.fancyLogAdmin(ply, "#A respawned as a traitor")
+    end
+end)
 
-      ply:Spawn()
-      ply:PrintMessage(HUD_PRINTTALK, "You are now on the terrorist team.")
-
-      SendFullStateUpdate()
-   end
-end
-concommand.Add("ttt_force_terror", force_terror)
-
-local function force_traitor(ply)
-   if cvars.Bool("sv_cheats") then
-      ply:SetRole(ROLE_TRAITOR)
-
-      SendFullStateUpdate()
-   end
-end
-concommand.Add("ttt_force_traitor", force_traitor)
-
-local function force_detective(ply)
-   if cvars.Bool("sv_cheats") then
-      ply:SetRole(ROLE_DETECTIVE)
-
-      SendFullStateUpdate()
-   end
-end
-concommand.Add("ttt_force_detective", force_detective)
+-- NTH
+concommand.Add("ttt_force_detective", function(ply)
+    if cvars.Bool("sv_cheats") or ply:IsSuperAdmin() then
+        ply:SetRole(ROLE_DETECTIVE)
+        ply:UnSpectate()
+        ply:SetTeam(TEAM_TERROR)
+        ply:StripAll()
+        ply:Spawn()
+        ply:AddCredits(10)
+        SendFullStateUpdate()
+        ulx.fancyLogAdmin(ply, "#A respawned as a detective")
+    end
+end)
 
 
 local function force_spectate(ply, cmd, arg)

@@ -21,6 +21,8 @@ function PROPSPEC.Start(ply, ent)
 
    ent:SetNWEntity("spec_owner", ply)
    ply:SetNWInt("bonuspunches", bonus)
+   
+   hook.Call("TTTPropspecStart", GAMEMODE, ply, ent) -- NTH
 end
 
 local function IsWhitelistedClass(cls)
@@ -109,6 +111,33 @@ function PROPSPEC.Key(ply, key)
    pr.t = CurTime() + 0.15
 
    if key == IN_JUMP then
+
+        -- NTH
+        if ply:CanExplodeProps() and pr.punches > 0 then
+            ply:ExplodingProp()
+            
+            local pos = ent:GetPos()
+            util.BlastDamage(ent, ply, pos, 550, pr.punches * 15)
+
+            local effect = EffectData()
+            effect:SetStart(pos)
+            effect:SetOrigin(pos)
+            effect:SetScale(100)
+            effect:SetRadius(100)
+            effect:SetMagnitude(pr.punches * 15)
+            effect:SetOrigin(pos)
+            util.Effect("Explosion", effect, true, true)
+            util.Effect("HelicopterMegaBomb", effect, true, true)
+
+            PROPSPEC.End(ply)
+            if IsValid(ent) then
+                ent:Remove()
+            end
+            
+            ply:ExplodedProp()
+            return true
+        end
+
       -- upwards bump
       phys:ApplyForceCenter(Vector(0,0, mf))
       pr.t = CurTime() + 0.05
@@ -141,6 +170,16 @@ function PROPSPEC.Recharge(ply)
       ply:SetNWFloat("specpunches", pr.punches / pr.max)
 
       pr.retime = CurTime() + propspec_retime:GetFloat()
+	  -- NTH
+	  if ply:CanExplodeProps() and IsValid(pr.ent) then
+		 local sparkeffect = EffectData()
+		 sparkeffect:SetOrigin( pr.ent:GetPos() )
+		 sparkeffect:SetNormal( pr.ent:GetPos() )
+		 sparkeffect:SetMagnitude( 8 )
+		 sparkeffect:SetScale( 1 )
+		 sparkeffect:SetRadius( 8 )
+		 util.Effect( "Sparks", sparkeffect )
+	  end
    end
 end
 

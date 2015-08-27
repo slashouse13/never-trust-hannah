@@ -115,7 +115,7 @@ local function DrawPropSpecLabels(client)
       end
 
       if scrpos and (not IsOffScreen(scrpos)) then
-         text = ply:Nick()
+         text = ply:GetDisplayName() -- NTH
          w, _ = surface.GetTextSize(text)
 
          surface.SetTextPos(scrpos.x - w / 2, scrpos.y)
@@ -175,7 +175,7 @@ function GM:HUDDrawTargetID()
          client.last_id = nil
 
          if client:IsTraitor() or client:IsSpec() then
-            text = ent:Nick() .. L.target_disg
+            text = ent:GetDisplayName() .. L.target_disg -- NTH
          else
             -- Do not show anything
             return
@@ -183,7 +183,10 @@ function GM:HUDDrawTargetID()
 
          color = COLOR_RED
       else
-         text = ent:Nick()
+         -- NTH
+         color = ent:GetDisplayNameColour()
+		 text = ent:GetDisplayName()
+
          client.last_id = ent
       end
 

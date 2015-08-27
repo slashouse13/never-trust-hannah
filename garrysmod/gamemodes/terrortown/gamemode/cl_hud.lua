@@ -153,7 +153,12 @@ local function PunchPaint(client)
 
    local color = bg_colors.background_main
 
-   dr.SimpleText(L.punch_title, "HealthAmmo", ScrW() / 2, y, color, TEXT_ALIGN_CENTER)
+   -- NTH
+   local punchometerTitle = L.punch_title
+   if client:CanExplodeProps() then
+		punchometerTitle = "EXPL-O-METER"
+   end
+   dr.SimpleText(punchometerTitle, "HealthAmmo", ScrW() / 2, y, color, TEXT_ALIGN_CENTER)
 
    dr.SimpleText(L.punch_help, "TabLarge", ScrW() / 2, margin, COLOR_WHITE, TEXT_ALIGN_CENTER)
 
@@ -199,7 +204,8 @@ local function SpecHUDPaint(client)
 
    local tgt = client:GetObserverTarget()
    if IsValid(tgt) and tgt:IsPlayer() then
-      ShadowedText(tgt:Nick(), "TimeLeft", ScrW() / 2, margin, COLOR_WHITE, TEXT_ALIGN_CENTER)
+      -- NTH
+      ShadowedText(tgt:GetDisplayName(), "TimeLeft", ScrW() / 2, margin, COLOR_WHITE, TEXT_ALIGN_CENTER)
 
    elseif IsValid(tgt) and tgt:GetNWEntity("spec_owner", nil) == client then
       PunchPaint(client)

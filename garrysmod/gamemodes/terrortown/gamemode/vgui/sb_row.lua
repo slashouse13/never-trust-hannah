@@ -20,7 +20,8 @@ function PANEL:Init()
    self.cols = {}
    self:AddColumn( GetTranslation("sb_ping"), function(ply) return ply:Ping() end )
    self:AddColumn( GetTranslation("sb_deaths"), function(ply) return ply:Deaths() end )
-   self:AddColumn( GetTranslation("sb_score"), function(ply) return ply:Frags() end )
+   self:AddColumn( GetTranslation("sb_score"), function(ply) return ply:GetNTHScore() end )
+   self:AddColumn( "Rank", function(ply) return ply:GetRankName() end )
 
    if KARMA.IsEnabled() then
       self:AddColumn( GetTranslation("sb_karma"), function(ply) return math.Round(ply:GetBaseKarma()) end )
@@ -165,9 +166,9 @@ function PANEL:UpdatePlayerData()
       self.cols[i]:SetText( self.cols[i].GetPlayerText(ply, self.cols[i]) )
    end
 
-   self.nick:SetText(ply:Nick())
+   self.nick:SetText(ply:GetDisplayName())
    self.nick:SizeToContents()
-   self.nick:SetTextColor(ColorForPlayer(ply))
+   self.nick:SetTextColor(ply:GetDisplayNameColour())
 
    local ptag = ply.sb_tag
    if ScoreGroup(ply) != GROUP_TERROR then

@@ -352,6 +352,8 @@ function CLSCORE:BuildHilitePanel(dpanel)
 end
 
 function CLSCORE:ShowPanel()
+    if not self.StartTime then return end -- NTH prevent client crashes on roundend when updating scripts
+
    local margin = 15
 
    local dpanel = vgui.Create("DFrame")

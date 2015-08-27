@@ -10,6 +10,8 @@ AccessorFunc(ENT, "dmgparent", "DamageParent")
 
 AccessorFunc(ENT, "die_explode", "ExplodeOnDeath")
 AccessorFunc(ENT, "dietime", "DieTime")
+AccessorFunc(ENT, "damage_override", "DamageOverride") -- NTH
+AccessorFunc(ENT, "damage_radius", "DamageRadius") -- NTH
 
 AccessorFuncDT(ENT, "burning", "Burning")
 
@@ -19,6 +21,8 @@ ENT.fireparams = {size=120, growth=1}
 ENT.dietime = 0
 ENT.next_hurt = 0
 ENT.hurt_interval = 1
+ENT.damage_override = 0 -- NTH - set fire damage
+ENT.damage_radius = 132 -- NTH - damage radius
 
 CreateConVar("ttt_fire_fallback", "0", FCVAR_ARCHIVE)
 
@@ -64,6 +68,8 @@ function StartFires(pos, tr, num, lifetime, explode, dmgowner)
       end
       flame:SetDieTime(CurTime() + lifetime + math.Rand(-2, 2))
       flame:SetExplodeOnDeath(explode)
+      flame:SetDamageOverride(0) -- NTH
+      flame:SetDamageRadius(132) -- NTH
 
       flame:Spawn()
       flame:PhysWake()
@@ -174,7 +180,12 @@ function ENT:Think()
 
          local dmg = DamageInfo()
          dmg:SetDamageType(DMG_BURN)
-         dmg:SetDamage(math.random(4,6))
+         -- NTH
+         if self.damage_override > 0 then
+            dmg:SetDamage(self.damage_override)
+         else
+            dmg:SetDamage(math.random(4,6))
+         end
          if IsValid(self:GetDamageParent()) then
             dmg:SetAttacker(self:GetDamageParent())
          else
@@ -182,7 +193,7 @@ function ENT:Think()
          end
          dmg:SetInflictor(self.firechild)
          
-         RadiusDamage(dmg, self:GetPos(), 132, self)
+         RadiusDamage(dmg, self:GetPos(), self.damage_radius, self)
 
          self.next_hurt = CurTime() + self.hurt_interval
       end

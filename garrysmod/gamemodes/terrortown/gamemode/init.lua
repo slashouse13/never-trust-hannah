@@ -444,6 +444,8 @@ function GM:TTTDelayRoundStartForVote()
 end
 
 function PrepareRound()
+    NTH.RoundSelect()
+
    -- Check playercount
    if CheckForAbort() then return end
 
@@ -513,6 +515,7 @@ function PrepareRound()
 
    -- Tell hooks and map we started prep
    hook.Call("TTTPrepareRound")
+   NTH.RoundTrigger('OnPrepare')
 
    ents.TTT.TriggerRoundStateOutputs(ROUND_PREP)
 end
@@ -529,7 +532,7 @@ function TellTraitorsAboutTraitors()
    local traitornicks = {}
    for k,v in pairs(player.GetAll()) do
       if v:IsTraitor() then
-         table.insert(traitornicks, v:Nick())
+         table.insert(traitornicks, v:GetDisplayName()) -- NTH
       end
    end
 
@@ -543,7 +546,7 @@ function TellTraitorsAboutTraitors()
          else
             local names = ""
             for i,name in pairs(traitornicks) do
-               if name != v:Nick() then
+               if name != v:GetDisplayName() then -- NTH
                   names = names .. name .. ", "
                end
             end
@@ -659,7 +662,7 @@ function BeginRound()
 
    -- Select traitors & co. This is where things really start so we can't abort
    -- anymore.
-   SelectRoles()
+   NTH.RoundTrigger('OnBegin')
    LANG.Msg("round_selected")
    SendFullStateUpdate()
 
@@ -693,6 +696,8 @@ function BeginRound()
    hook.Call("TTTBeginRound")
 
    ents.TTT.TriggerRoundStateOutputs(ROUND_BEGIN)
+   
+   NTH.RoundTrigger('OnBegun')
 end
 
 function PrintResultMessage(type)
@@ -797,6 +802,7 @@ function EndRound(type)
    -- server plugins might want to start a map vote here or something
    -- these hooks are not used by TTT internally
    hook.Call("TTTEndRound", GAMEMODE, type)
+   NTH.RoundTrigger('OnEnd', {winType = type})
 
    ents.TTT.TriggerRoundStateOutputs(ROUND_POST, type)
 end
@@ -809,38 +815,10 @@ end
 function GM:TTTCheckForWin()
    if ttt_dbgwin:GetBool() then return WIN_NONE end
 
-   if GAMEMODE.MapWin == WIN_TRAITOR or GAMEMODE.MapWin == WIN_INNOCENT then
-      local mw = GAMEMODE.MapWin
-      GAMEMODE.MapWin = WIN_NONE
-      return mw
-   end
-
-   local traitor_alive = false
-   local innocent_alive = false
-   for k,v in pairs(player.GetAll()) do
-      if v:Alive() and v:IsTerror() then
-         if v:GetTraitor() then
-            traitor_alive = true
-         else
-            innocent_alive = true
-         end
-      end
-
-      if traitor_alive and innocent_alive then
-         return WIN_NONE --early out
-      end
-   end
-
-   if traitor_alive and not innocent_alive then
-      return WIN_TRAITOR
-   elseif not traitor_alive and innocent_alive then
-      return WIN_INNOCENT
-   elseif not innocent_alive then
-      -- ultimately if no one is alive, traitors win
-      return WIN_TRAITOR
-   end
-
-   return WIN_NONE
+   if not NTH.Round then return WIN_NONE end
+   local chk = NTH.Round:WinCheck()
+   if chk == nil then return WIN_NONE end
+   return chk
 end
 
 local function GetTraitorCount(ply_count)
@@ -1005,3 +983,6 @@ function AnnounceVersion()
       end
    end
 end
+
+-- NTH - Now seems like a good place to inject the Never Trust Hannah stuff
+include("nth/init_sv.lua")

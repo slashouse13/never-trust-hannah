@@ -259,7 +259,7 @@ L.set_fastsw        = "Fast weapon switch"
 L.set_fastsw_tip    = "Enable to cycle through weapons when you scroll without opening the weapon switcher menu."
 L.set_wswitch       = "Disable weapon switch menu auto-closing"
 L.set_wswitch_tip   = "By default the weapon switcher automatically closes a few seconds after you last scroll. Enable this to make it stay up."
-L.set_cues          = "Play sound cue when a round begins or ends"
+L.set_cues          = "Play music at end of round" -- NTH
 
 
 L.set_title_play    = "Gameplay settings"

@@ -33,6 +33,8 @@ SWEP.Secondary.Automatic	= false
 SWEP.Secondary.Ammo  = "none"
 SWEP.Secondary.Delay = 0.5
 
+SWEP.LimitedStock = true
+
 SWEP.AutoSpawnable = false
 SWEP.NoSights = true
 

@@ -211,9 +211,9 @@ function plymeta:SetSpeed(slowed)
       self:SetRunSpeed(120 * mul)
       self:SetMaxSpeed(120 * mul)
    else
-      self:SetWalkSpeed(220 * mul)
-      self:SetRunSpeed(220 * mul)
-      self:SetMaxSpeed(220 * mul)
+      self:SetWalkSpeed(self:GetRunSpeed() * mul)
+      self:SetRunSpeed(self:GetRunSpeed() * mul)
+      self:SetMaxSpeed(self:GetRunSpeed() * mul)
    end
 end
 
@@ -355,4 +355,32 @@ end
 
 function plymeta:GetAvoidDetective()
    return self:GetInfoNum("ttt_avoid_detective", 0) > 0
+end
+
+-- NTH Player Extensions (SERVER)
+-- These functions are intended to be overridden by NTH addons
+
+-- does this player count as a traitor in a traitor tester?
+function plymeta:TraitorTest()
+    return self:IsActiveTraitor()
+end
+
+-- can this player talk using their microphone?
+function plymeta:CanUseVoiceChat()
+    return true
+end
+
+-- how much fall damage should we take at this speed?
+function plymeta:CalculateFallDamage(speed)
+    return math.pow(0.05 * (speed - 420), 1.75)
+end
+
+-- how fast can we run when not "slowed"?
+function plymeta:GetRunSpeed()
+    return 220
+end
+
+-- what to do when killed by the named killer
+function plymeta:KilledBy(killer)
+    return
 end
