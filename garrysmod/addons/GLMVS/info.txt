@@ -1,0 +1,7 @@
+"AddonInfo"
+{
+	"name" "GLMVS"
+	"author_name" "ptown2"
+	"version" "1.0.2.1"
+	"info" "A globalized map voting system add-on that supports multiple gamemodes at once."
+}
