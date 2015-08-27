@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"				"Jihad Bomb"
+	"version"			"1"
+	"up_date"			"26th February 2008"
+	"author_name"		"Stingwraith (thanks jtl, Kogitsune, and others for help)"
+	"author_email"		""
+	"author_url"		""
+	"info"				"Sacrifice yourself to Allah with this powerful IEDS."
+	"override"			"0"
+}
