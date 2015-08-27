@@ -8,3 +8,7 @@ garrysmod/downloadlists/
 garrysmod/cfg/
 garrysmod/download/
 *.ztmp
+garrysmod/lua/includes/nth/config_sh.lua
+garrysmod/lua/includes/nth/config_sv.lua
+garrysmod/sv.db
+garrysmod/data/
