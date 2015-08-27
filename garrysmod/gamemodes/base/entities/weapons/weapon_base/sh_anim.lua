@@ -71,7 +71,7 @@ SWEP:SetWeaponHoldType( "pistol" )
 -----------------------------------------------------------]]
 function SWEP:TranslateActivity( act )
 
-	if ( self and self.Owner and self.Owner:IsNPC() ) then
+	if ( self.Owner:IsNPC() ) then
 		if ( self.ActivityTranslateAI[ act ] ) then
 			return self.ActivityTranslateAI[ act ]
 		end
