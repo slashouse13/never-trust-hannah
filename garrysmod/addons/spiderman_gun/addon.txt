@@ -1,0 +1,10 @@
+"AddonInfo"
+{
+	"name"				"Spiderman Gun"
+	"version"			"1"
+	"author_name"		""
+	"author_email"		""
+	"author_url"		""
+	"info"				""
+	"override"			"0"
+}
