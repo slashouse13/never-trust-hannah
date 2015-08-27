@@ -1,0 +1,10 @@
+"AddonInfo"
+{
+	"name"				"Hammy's Big Toe"
+	"version"			"1.0.0"
+	"author_name"		"PC & G"
+	"author_email"		""
+	"author_url"		""
+	"info"				""
+	"override"			"0"
+}
