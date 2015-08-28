@@ -6,7 +6,7 @@ SWEP.HoldType			= "crossbow"
 
 if CLIENT then
    -- NTH
-   SWEP.PrintName			= "Hammy's Big Toe"
+   SWEP.PrintName			= "Fucking Big Gun"
 
    SWEP.Slot				= 2
 
