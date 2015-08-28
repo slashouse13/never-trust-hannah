@@ -1,0 +1,4 @@
+[submodule "garrysmod/addons/ttt_damagelogs"]
+	path = garrysmod/addons/ttt_damagelogs
+	url = https://github.com/mikuso/TTTDamagelogs.git
+	branch = master
