@@ -13,3 +13,5 @@ garrysmod/lua/includes/nth/config_sv.lua
 garrysmod/sv.db
 garrysmod/data/
 *.vpk
+garrysmod/downloads/
+srcds.exe
