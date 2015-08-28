@@ -1,4 +1,4 @@
-resource.AddFile("materials/VGUI/ttt/icon_g3sg1.vmt")
+resource.AddFile("materials/vgui/ttt/icon_g3sg1.vmt")
 
 if SERVER then
 
@@ -15,7 +15,7 @@ if CLIENT then
    SWEP.Slot               = 2
    SWEP.SlotPos            = 1
    SWEP.IconLetter         = "w"
-   SWEP.Icon = "VGUI/ttt/icon_g3sg1"    
+   SWEP.Icon = "vgui/ttt/icon_g3sg1"    
 end
 
 

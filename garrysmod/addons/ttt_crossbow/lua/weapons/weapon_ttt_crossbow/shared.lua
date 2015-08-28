@@ -24,13 +24,13 @@ if CLIENT then
    SWEP.Slot               = 6
    SWEP.SlotPos            = 1
    SWEP.IconLetter         = "w"
-   SWEP.Icon = "VGUI/ttt/icon_crossbow"    
+   SWEP.Icon = "vgui/ttt/icon_crossbow"    
    
    SWEP.ViewModelFlip = false
 end
 
 if SERVER then
-   resource.AddFile("materials/VGUI/ttt/icon_crossbow.vmt")
+   resource.AddFile("materials/vgui/ttt/icon_crossbow.vmt")
 end
 
 SWEP.Base               = "weapon_tttbase"
