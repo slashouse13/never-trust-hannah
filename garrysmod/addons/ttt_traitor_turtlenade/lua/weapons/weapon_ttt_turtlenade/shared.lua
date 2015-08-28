@@ -1,4 +1,4 @@
-resource.AddFile("materials/VGUI/ttt/icon_tl_turtle.vmt")
+resource.AddFile("materials/vgui/ttt/icon_tl_turtle.vmt")
 
 if SERVER then
    AddCSLuaFile( "shared.lua" )
@@ -30,10 +30,10 @@ if CLIENT then
    	SWEP.PrintName	 = "Turtle Grenade"
 	SWEP.Slot		 = 7
 
-	if file.Exists("materials/VGUI/ttt/icon_tl_turtle.vmt", "GAME") then
-		SWEP.Icon = "VGUI/ttt/icon_tl_turtle"
+	if file.Exists("materials/vgui/ttt/icon_tl_turtle.vmt", "GAME") then
+		SWEP.Icon = "vgui/ttt/icon_tl_turtle"
 	else
-		SWEP.Icon = "VGUI/ttt/icon_nades"
+		SWEP.Icon = "vgui/ttt/icon_nades"
 	end
    -- Text shown in the equip menu
 	SWEP.EquipMenuData = {
