@@ -1,0 +1,6 @@
+"VertexLitGeneric"
+{
+	 $model 1
+	 $basetexture "models/weapons/bigtoe/jcp"
+	 $surfaceprop flesh
+}

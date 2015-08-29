@@ -9,7 +9,10 @@ if SERVER then
 
    local customSkins = {
       "tarik",
-      "grace"
+      "grace",
+      "helen",
+      "puppycat",
+      "jcp",
    }
 
    for _,s in pairs(customSkins) do
@@ -25,6 +28,22 @@ local customToes = {
    ["76561198138301137"] = { -- Grace
       mat = "grace",
       name = "Grace's Big Toe"
+   },
+   ["76561198078453986"] = { -- Puppycat
+      mat = "puppycat",
+      name = "Puppycat's Big Toe"
+   },
+   ["76561198115139525"] = { -- Helen
+      mat = "helen",
+      name = "Helen's Big Toe"
+   },
+   ["76561198036674533"] = { -- JCP / John Clese Parap
+      mat = "jcp",
+      name = "Artist's Big Toe"
+   },
+   ["76561198155643390"] = { -- JCP / SlashdotPaw
+      mat = "jcp",
+      name = "Artist's Big Toe"
    },
 }
 
