@@ -25,6 +25,7 @@ AddCSLuaFile("achievements_cl.lua")
 AddCSLuaFile("hitmark_cl.lua")
 
 --AddCSLuaFile("toys/pepsi.lua")
+AddCSLuaFile("customskins_cl.lua")
 
 -- Let's get busy
 CreateConVar("nth_vip_min_players", 5)

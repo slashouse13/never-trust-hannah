@@ -97,7 +97,15 @@ local TryTranslation = LANG.TryTranslation
 function WSWITCH:DrawWeapon(x, y, c, wep)
    if not IsValid(wep) then return false end
 
-   local name = TryTranslation(wep:GetPrintName() or wep.PrintName or "...")
+      -- NTH
+   local NTHCustomname = nil
+   if wep.GetCustomName then
+      NTHCustomname = wep:GetCustomName()
+      if NTHCustomname:len() == 0 then
+         NTHCustomname = nil
+      end
+   end
+   local name = TryTranslation(NTHCustomname or wep:GetPrintName() or wep.PrintName or "...")
    local cl1, am1 = wep:Clip1(), wep:Ammo1()
    local ammo = false
 

@@ -17,7 +17,15 @@ local pickupclr = {
 function GM:HUDWeaponPickedUp( wep )
    if (not IsValid(wep)) or (not LocalPlayer():Alive()) then return end
 
-   local name = LANG.TryTranslation(wep.GetPrintName and wep:GetPrintName() or wep:GetClass() or "Unknown Weapon Name")
+   -- NTH
+   local NTHCustomname = nil
+   if wep.GetCustomName then
+      NTHCustomname = wep:GetCustomName()
+      if NTHCustomname:len() == 0 then
+         NTHCustomname = nil
+      end
+   end
+   local name = LANG.TryTranslation(NTHCustomname or (wep.GetPrintName and wep:GetPrintName()) or wep:GetClass() or "Unknown Weapon Name")
 
    local pickup = {}
    pickup.time      = CurTime()

@@ -6,7 +6,28 @@ if SERVER then
    resource.AddFile("materials/models/weapons/bigtoe/toed.vtf")
    resource.AddFile("materials/vgui/ttt/icon_weapon_nth_bigtoe.vmt")
    resource.AddFile("materials/vgui/ttt/icon_weapon_nth_bigtoe.vtf")
+
+   local customSkins = {
+      "tarik",
+      "grace"
+   }
+
+   for _,s in pairs(customSkins) do
+      resource.AddFile("materials/models/weapons/bigtoe/" .. s .. ".vmt")
+   end
 end
+
+local customToes = {
+   ["76561198053757224"] = {  -- Tarik
+      mat = "tarik",
+      name = "Tarik's Big Toe"
+   },
+   ["76561198138301137"] = { -- Grace
+      mat = "grace",
+      name = "Grace's Big Toe"
+   },
+}
+
 
 AddCSLuaFile()
 
@@ -65,6 +86,20 @@ SWEP.AutoSpawnable = false
 SWEP.AllowDrop = true
 
 local sound_single = Sound("Weapon_Crowbar.Single")
+
+function SWEP:SetupDataTables()
+   self:NetworkVar("String", 0, "CustomName")
+end
+
+function SWEP:WasBought(ply)
+   local id = ply:SteamID64()
+
+   if not customToes[id] then return end
+   local c = customToes[id];
+
+   self:SetMaterial("models/weapons/bigtoe/" .. c.mat)
+   self:SetCustomName(c.name)
+end
 
 function SWEP:Initialize()
 	self:SetHoldType( self.HoldType )
