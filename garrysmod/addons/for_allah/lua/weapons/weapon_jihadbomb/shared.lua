@@ -14,8 +14,8 @@ if CLIENT then
       desc  = "Left click goes boom!"
    };
 
-   resource.AddFile("VGUI/ttt/icon_c4")
-   SWEP.Icon = "VGUI/ttt/icon_c4"
+   resource.AddFile("vgui/ttt/icon_c4")
+   SWEP.Icon = "vgui/ttt/icon_c4"
 end
 
 SWEP.Base = "weapon_tttbase"
