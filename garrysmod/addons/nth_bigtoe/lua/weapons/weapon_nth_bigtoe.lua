@@ -11,7 +11,7 @@ if SERVER then
       "tarik",
       "grace",
       "helen",
-      "puppycat",
+      "puppycat2",
       "jcp",
    }
 
@@ -30,7 +30,7 @@ local customToes = {
       name = "Grace's Big Toe"
    },
    ["76561198078453986"] = { -- Puppycat
-      mat = "puppycat",
+      mat = "puppycat2",
       name = "Puppycat's Big Toe"
    },
    ["76561198115139525"] = { -- Helen

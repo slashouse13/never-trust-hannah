@@ -1,7 +1,7 @@
 "VertexLitGeneric"
 {
 	 $model 1
-	 $basetexture "models/weapons/bigtoe/puppycat"
+	 $basetexture "models/weapons/bigtoe/puppycat2"
 	 $bumpmap "models/weapons/bigtoe/toen"
 	 $surfaceprop flesh
 }
