@@ -13,6 +13,7 @@ if SERVER then
       "helen",
       "puppycat2",
       "jcp",
+      "gareth",
    }
 
    for _,s in pairs(customSkins) do
@@ -21,6 +22,10 @@ if SERVER then
 end
 
 local customToes = {
+   ["76561197961558956"] = {  -- Gareth
+      mat = "gareth",
+      name = "Gareth's Golden Toe"
+   },
    ["76561198053757224"] = {  -- Tarik
       mat = "tarik",
       name = "Tarik's Big Toe"
@@ -80,7 +85,7 @@ SWEP.IronSightsAng = Vector(0, 0, 0)
 SWEP.Base				= "weapon_tttbase"
 SWEP.Weight			= 1
 SWEP.DrawCrosshair		= false
-SWEP.Primary.Damage = 26
+SWEP.Primary.Damage = 30
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1
 SWEP.Primary.Automatic		= true
