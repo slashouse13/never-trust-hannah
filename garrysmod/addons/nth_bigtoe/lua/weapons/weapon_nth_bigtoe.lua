@@ -80,11 +80,11 @@ SWEP.IronSightsAng = Vector(0, 0, 0)
 SWEP.Base				= "weapon_tttbase"
 SWEP.Weight			= 1
 SWEP.DrawCrosshair		= false
-SWEP.Primary.Damage = 35
+SWEP.Primary.Damage = 26
 SWEP.Primary.ClipSize		= -1
 SWEP.Primary.DefaultClip	= -1
 SWEP.Primary.Automatic		= true
-SWEP.Primary.Delay = 0.4
+SWEP.Primary.Delay = 0.44
 SWEP.Primary.Ammo		= "none"
 SWEP.Primary.MaxReach = 100
 SWEP.Secondary.ClipSize		= -1
@@ -96,6 +96,7 @@ SWEP.Secondary.MaxReach = 100
 
 SWEP.Kind = WEAPON_EQUIP
 SWEP.CanBuy = { ROLE_TRAITOR }
+SWEP.LimitedStock = true -- only buyable once
 
 SWEP.NoSights = true
 SWEP.IsSilent = true
