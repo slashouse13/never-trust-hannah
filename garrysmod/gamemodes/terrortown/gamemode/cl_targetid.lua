@@ -127,6 +127,13 @@ end
 
 ---- Crosshair affairs
 
+surface.CreateFont("TargetIDSmall", {
+   font = "Trebuchet MS",
+   size = 18,
+   weight = 900,
+   antialias = true,
+})
+
 surface.CreateFont("TargetIDSmall2", {font = "TargetID",
                                       size = 16,
                                       weight = 1000})
