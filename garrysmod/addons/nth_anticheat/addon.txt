@@ -1,0 +1,10 @@
+"AddonInfo"
+{
+	"name"				"Anti-Cheat"
+	"version"			"1"
+	"author_name"		"G & G"
+	"author_email"		""
+	"author_url"		""
+	"info"				""
+	"override"			"0"
+}
