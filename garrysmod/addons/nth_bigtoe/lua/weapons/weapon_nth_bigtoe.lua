@@ -14,6 +14,7 @@ if SERVER then
       "puppycat2",
       "jcp",
       "gareth",
+      "dan",
    }
 
    for _,s in pairs(customSkins) do
