@@ -50,6 +50,10 @@ local customToes = {
       mat = "jcp",
       name = "Artist's Big Toe"
    },
+   ["76561198059069063"] = { -- DanTheSpooderOwl
+      mat = "dan",
+      name = "Dan's Big Toe"
+   },
 }
 
 
