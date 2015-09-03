@@ -7,61 +7,29 @@ if SERVER then
    resource.AddFile("materials/vgui/ttt/icon_weapon_nth_bigtoe.vmt")
    resource.AddFile("materials/vgui/ttt/icon_weapon_nth_bigtoe.vtf")
 
-   local customSkins = {
-      "tarik",
-      "grace",
-      "helen",
-      "puppycat2",
-      "jcp",
-      "gareth",
-      "dan",
-   }
-
+   local customSkins = file.Find("materials/models/weapons/bigtoe/*.vmt", "GAME")
    for _,s in pairs(customSkins) do
-      resource.AddFile("materials/models/weapons/bigtoe/" .. s .. ".vmt")
+      resource.AddFile("materials/models/weapons/bigtoe/" .. s)
    end
 end
 
 local customToes = {
-   ["76561197961558956"] = {  -- Gareth
-      mat = "gareth",
-      name = "Gareth's Golden Toe"
-   },
-   ["76561198053757224"] = {  -- Tarik
-      mat = "tarik",
-      name = "Tarik's Big Toe"
-   },
-   ["76561198138301137"] = { -- Grace
-      mat = "grace",
-      name = "Grace's Big Toe"
-   },
-   ["76561198078453986"] = { -- Puppycat
-      mat = "puppycat2",
-      name = "Puppycat's Big Toe"
-   },
-   ["76561198115139525"] = { -- Helen
-      mat = "helen",
-      name = "Helen's Big Toe"
-   },
-   ["76561198036674533"] = { -- JCP / John Clese Parap
-      mat = "jcp",
-      name = "Artist's Big Toe"
-   },
-   ["76561198155643390"] = { -- JCP / SlashdotPaw
-      mat = "jcp",
-      name = "Artist's Big Toe"
-   },
-   ["76561198059069063"] = { -- DanTheSpooderOwl
-      mat = "dan",
-      name = "Dan's Big Toe"
-   },
+   ["76561197961558956"] = {mat = "gareth",     name = "Gareth's Golden Toe"  }, -- Gareth
+   ["76561198053757224"] = {mat = "tarik",      name = "Tarik's Big Toe"      }, -- Tarik
+   ["76561198138301137"] = {mat = "grace",      name = "Grace's Big Toe"      }, -- Gracie
+   ["76561198078453986"] = {mat = "puppycat2",  name = "Puppycat's Big Toe"   }, -- Puppycat
+   ["76561198115139525"] = {mat = "helen",      name = "Helen's Big Toe"      }, -- Helen
+   ["76561198036674533"] = {mat = "jcp",        name = "Artist's Big Toe"     }, -- John Clese
+   ["76561198155643390"] = {mat = "jcp",        name = "Artist's Big Toe"     }, -- SlashDotPaw
+   ["76561198059069063"] = {mat = "dan",        name = "Dan's Big Toe"        }, -- Dan The Spooder Owl
+   ["76561198072995827"] = {mat = "hammade",    name = "Hammade's Big Toe"    }, -- Hammade
 }
 
 
 AddCSLuaFile()
 
 if CLIENT then
-   SWEP.PrintName			= "Hammy's Big Toe"
+   SWEP.PrintName			= "A Big Toe"
 
    SWEP.Slot				= 6
 
