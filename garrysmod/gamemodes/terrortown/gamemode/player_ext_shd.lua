@@ -263,6 +263,15 @@ function plymeta:GetDisplayName()
     return self:Nick()
 end
 
+-- get the player's display name (Nickname or VIP Name or something else?)
+function plymeta:GetAKAName()
+    if not self.IsVIP or not self:IsVIP() then
+      return self:GetDisplayName()
+    end
+
+    return self:GetDisplayName() .. " (a.k.a. " .. self:Nick() .. ")"
+end
+
 -- get the colour of the player's display name
 function plymeta:GetDisplayNameColour()
     if self:IsAdmin() then

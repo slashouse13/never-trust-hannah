@@ -1,4 +1,3 @@
-print("Kill message script loaded!")
 local teamslist = {" innocent.", " traitor.", " detective."}
 local teamscolors = {Color(0, 200, 0, 255), Color(180, 50, 40, 255), Color(50, 60, 180, 255)} 
 

@@ -35,7 +35,7 @@ function CreateTransferMenu(parent)
    for _, p in pairs(player.GetAll()) do
       if IsValid(p) and p:IsActiveRole(r) and p != LocalPlayer() then
          -- NTH
-         dpick:AddChoice(p:GetDisplayName(), p:UniqueID())
+         dpick:AddChoice(p:GetAKAName(), p:UniqueID())
       end
    end
 

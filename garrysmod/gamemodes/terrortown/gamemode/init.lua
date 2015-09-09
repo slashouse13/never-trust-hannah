@@ -532,7 +532,7 @@ function TellTraitorsAboutTraitors()
    local traitornicks = {}
    for k,v in pairs(player.GetAll()) do
       if v:IsTraitor() then
-         table.insert(traitornicks, v:GetDisplayName()) -- NTH
+         table.insert(traitornicks, v:GetAKAName()) -- NTH
       end
    end
 
@@ -546,7 +546,7 @@ function TellTraitorsAboutTraitors()
          else
             local names = ""
             for i,name in pairs(traitornicks) do
-               if name != v:GetDisplayName() then -- NTH
+               if name != v:GetAKAName() then -- NTH
                   names = names .. name .. ", "
                end
             end

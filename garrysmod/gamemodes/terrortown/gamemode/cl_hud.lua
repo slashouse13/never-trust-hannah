@@ -205,7 +205,7 @@ local function SpecHUDPaint(client)
    local tgt = client:GetObserverTarget()
    if IsValid(tgt) and tgt:IsPlayer() then
       -- NTH
-      ShadowedText(tgt:GetDisplayName(), "TimeLeft", ScrW() / 2, margin, COLOR_WHITE, TEXT_ALIGN_CENTER)
+      ShadowedText(tgt:GetAKAName(), "TimeLeft", ScrW() / 2, margin, COLOR_WHITE, TEXT_ALIGN_CENTER)
 
    elseif IsValid(tgt) and tgt:GetNWEntity("spec_owner", nil) == client then
       PunchPaint(client)

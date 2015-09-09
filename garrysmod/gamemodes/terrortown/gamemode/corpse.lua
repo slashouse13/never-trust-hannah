@@ -45,7 +45,7 @@ local function IdentifyBody(ply, rag)
       return
    end
 
-   local finder = ply:GetDisplayName() -- NTH
+   local finder = ply:GetAKAName() -- NTH
    local nick = CORPSE.GetPlayerNick(rag, "")
    local traitor = (rag.was_role == ROLE_TRAITOR)
 
@@ -96,7 +96,7 @@ local function IdentifyBody(ply, rag)
 
       -- is this an unconfirmed dead?
       if IsValid(vic) and (not vic:GetNWBool("body_found", false)) then
-         LANG.Msg("body_confirm", {finder = finder, victim = vic:GetDisplayName()}) -- NTH
+         LANG.Msg("body_confirm", {finder = finder, victim = vic:GetAKAName()}) -- NTH
 
          -- update scoreboard status
          vic:SetNWBool("body_found", true)
@@ -152,7 +152,7 @@ local function CallDetective(ply, cmd, args)
             net.WriteVector(rag:GetPos())
          net.Send(GetDetectiveFilter(true))
 
-         LANG.Msg("body_call", {player = ply:GetDisplayName(), -- NTH
+         LANG.Msg("body_call", {player = ply:GetAKAName(), -- NTH
                                 victim = CORPSE.GetPlayerNick(rag, "someone")})
 
       else

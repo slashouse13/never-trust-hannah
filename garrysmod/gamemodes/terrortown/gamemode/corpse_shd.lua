@@ -22,7 +22,7 @@ function CORPSE.GetPlayerNick(rag, default)
 
    local ply = rag:GetDTEntity(dti.ENT_PLAYER)
    if IsValid(ply) then
-      return ply:GetDisplayName() -- NTH
+      return ply:GetAKAName() -- NTH
    else
       return rag:GetNWString("nick", default)
    end
