@@ -58,8 +58,6 @@ function StartFires(pos, tr, num, lifetime, explode, dmgowner)
    for i=1, num do
       local ang = Angle(-math.Rand(0, 180), math.Rand(0, 360), math.Rand(0, 360))
 
-      local vstart = pos + tr.HitNormal * 64
-
       local flame = ents.Create("ttt_flame")
       flame:SetPos(pos)
       if IsValid(dmgowner) and dmgowner:IsPlayer() then

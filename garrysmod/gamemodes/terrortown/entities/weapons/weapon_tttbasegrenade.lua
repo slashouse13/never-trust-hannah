@@ -110,6 +110,7 @@ function SWEP:Think()
          if SERVER and self:GetDetTime() < CurTime() then
             self.was_cooked = true -- NTH
             self:BlowInFace()
+            hook.Call("NTH-BaseGrenade-CookedInFace", GAMEMODE, self) -- NTH
          end
       end
    elseif self:GetThrowTime() > 0 and self:GetThrowTime() < CurTime() then
