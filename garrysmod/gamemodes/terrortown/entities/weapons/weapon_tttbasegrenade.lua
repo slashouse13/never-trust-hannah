@@ -43,6 +43,7 @@ SWEP.IsGrenade = true
 SWEP.NoSights = true
 
 SWEP.was_thrown = false
+SWEP.was_cooked = false -- NTH
 
 SWEP.detonate_timer = 5
 
@@ -107,6 +108,7 @@ function SWEP:Think()
       else
          -- still cooking it, see if our time is up
          if SERVER and self:GetDetTime() < CurTime() then
+            self.was_cooked = true -- NTH
             self:BlowInFace()
          end
       end
@@ -189,6 +191,7 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
    --   gren:SetVelocity(vel)
    gren:SetOwner(ply)
    gren:SetThrower(ply)
+   gren:SetCooked(self.was_cooked) -- NTH
 
    gren:SetGravity(0.4)
    gren:SetFriction(0.2)
@@ -255,6 +258,7 @@ function SWEP:Initialize()
    self:SetPin(false)
 
    self.was_thrown = false
+   self.was_cooked = false -- NTH
 end
 
 function SWEP:OnRemove()

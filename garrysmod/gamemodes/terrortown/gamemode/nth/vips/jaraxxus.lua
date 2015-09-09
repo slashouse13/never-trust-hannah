@@ -14,6 +14,40 @@ hook.Add("EntityTakeDamage", "VIP-JARAXXUS-EntityTakeDamage", function(ply, dmg)
     end
 end)
 
+hook.Add("NTH-TGTurtle-Spawned", "NTH-TGTurtle-Spawned-Jaraxxus", function(turtle, proj)
+    if not IsValid(proj) or not proj.GetThrower or not proj.GetCooked then return end
+    local ply = proj:GetThrower()
+    if not IsValid(ply) or not ply.IsVIP then return end
+
+    if ply:IsVIP("JARAXXUS") and proj:GetCooked() then
+        turtle:Ignite(30)
+        turtle.is_infernal = true;
+    end
+end)
+
+hook.Add("NTH-TGTurtle-Died", "NTH-TGTurtle-Died-Jaraxxus", function(entNPC, corpse)
+    if not entNPC.is_infernal then return end
+
+    local flame = ents.Create("ttt_flame")
+    flame:SetPos(corpse:GetPos())
+    local dmgowner = entNPC:GetNWEntity("Thrower")
+    print("Creating flame belonging to ", dmgowner)
+    if IsValid(dmgowner) and dmgowner:IsPlayer() then
+        flame:SetDamageParent(dmgowner)
+        flame:SetOwner(dmgowner)
+    end
+    flame.fireparams = {size=500, growth=1}
+    flame.next_hurt = CurTime()
+    flame:SetDieTime(CurTime() + 500)
+    -- flame:SetExplodeOnDeath(explode)
+    flame:SetDamageOverride(8)
+    flame:SetDamageRadius(120)
+
+    flame:SetParent(corpse)
+    corpse:SetColor(Color(40,0,0,255))
+    flame:Spawn()
+end)
+
 if SERVER then
     local infernals
     infernals = {}

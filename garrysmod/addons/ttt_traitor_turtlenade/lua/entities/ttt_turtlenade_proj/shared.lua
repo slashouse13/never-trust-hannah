@@ -81,6 +81,7 @@ function ENT:Explode(tr)
 			--headturtle:SetName(self:GetThrower():GetName())
 			headturtle:SetNoDraw(true)
 			headturtle:SetHealth(1000)
+			hook.Call("NTH-TGTurtle-Spawned", GAMEMODE, headturtle, self) -- NTH
 		end
 	  
       self:Remove()
@@ -222,6 +223,7 @@ function TurtleNadeDamage(victim, dmg)
 			local phys = turtle:GetPhysicsObject()
 			if !(phys && IsValid(phys)) then turtle:Remove() end
 			
+			hook.Call("NTH-TGTurtle-Died", GAMEMODE, victim, turtle) -- NTH
 			victim:Remove()
 		end
 	end
