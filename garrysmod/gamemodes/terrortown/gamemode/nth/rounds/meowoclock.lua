@@ -51,6 +51,8 @@ function Round:OnBegun()
         net.WriteBit(true)
         net.WriteUInt(EQUIP_RADAR, 16)
         net.Send(plys)
+
+        NTH.SuddenDeath:EnableStarterTimer(15)
     end
 end
 
