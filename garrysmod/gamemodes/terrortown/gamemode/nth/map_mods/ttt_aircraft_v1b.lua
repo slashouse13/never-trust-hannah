@@ -105,7 +105,8 @@ if SERVER then
         local troublemakers = {}
         for _,p in pairs(player.GetAll()) do
             if isPlayerInPosition(p) then
-                if table.HasValue(permitIds, p:SteamID()) then
+                -- if table.HasValue(permitIds, p:SteamID()) then
+                if #couple < 2 then
                     table.insert(couple, p)
                 else
                     table.insert(troublemakers, p)
