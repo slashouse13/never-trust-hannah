@@ -62,9 +62,10 @@ function KARMA.GetKillReward()
    return KARMA.GetHurtReward(config.tbonus:GetFloat())
 end
 
-function KARMA.GivePenalty(ply, penalty)
-   ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
-end
+function KARMA.GivePenalty(ply, penalty, victim)
+        if not hook.Call( "TTTKarmaGivePenalty", nil, ply, penalty, victim ) then
+                ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+        end
 
 -- NTH
 function KARMA.GivePenaltyRealtime(ply, penalty)
@@ -221,11 +222,13 @@ function KARMA.RoundIncrement()
    local cleanbonus = config.clean:GetFloat()
 
    for _, ply in pairs(player.GetAll()) do
-      local bonus = healbonus + (ply:GetCleanRound() and cleanbonus or 0)
-      KARMA.GiveReward(ply, bonus)
+      if ply:IsDeadTerror() and ply.death_type ~= KILL_SUICIDE or not ply:IsSpec() then
+         local bonus = healbonus + (ply:GetCleanRound() and cleanbonus or 0)
+         KARMA.GiveReward(ply, bonus)
 
-      if IsDebug() then
-         print(ply, "gets roundincr", incr)
+         if IsDebug() then
+            print(ply, "gets roundincr", incr)
+         end
       end
    end
 

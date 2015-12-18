@@ -167,7 +167,7 @@ end
 local loc_voice = CreateConVar("ttt_locational_voice", "0")
 
 -- Of course voice has to be limited as well
-function GM:PlayerCanHearPlayersVoice( listener, speaker )
+function GM:PlayerCanHearPlayersVoice(listener, speaker)
 
    -- NTH - any reason why we can't speak?
    if not speaker:CanUseVoiceChat() then

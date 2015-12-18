@@ -232,3 +232,9 @@ loading
 	cursor: pointer;
 	z-index: 1000;
 }
+
+/* A hack for checkboxes on Linux */
+input[type=checkbox] {
+	-webkit-appearance: checkbox;
+	appearance: checkbox;
+}

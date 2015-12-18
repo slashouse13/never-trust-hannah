@@ -15,6 +15,7 @@ function PANEL:Init()
 
 	JS_Language( self.HTML )
 	JS_Utility( self.HTML )
+	JS_Workshop( self.HTML )
 
 	self.HTML:Dock( FILL )
 	self.HTML:OpenURL( "asset://garrysmod/html/menu.html" )
@@ -147,10 +148,11 @@ end
 --
 function UpdateMapList()
 
-	if ( !istable( g_MapListCategorised ) ) then return end
+	local MapList = GetMapList()
+	if ( !MapList ) then return end
 
-	json = util.TableToJSON( g_MapListCategorised )
-	if ( !isstring( json ) ) then return end
+	local json = util.TableToJSON( MapList )
+	if ( !json ) then return end
 
 	pnlMainMenu:Call( "UpdateMaps(" .. json .. ")" )
 
