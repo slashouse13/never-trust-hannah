@@ -63,9 +63,10 @@ function KARMA.GetKillReward()
 end
 
 function KARMA.GivePenalty(ply, penalty, victim)
-        if not hook.Call( "TTTKarmaGivePenalty", nil, ply, penalty, victim ) then
-                ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
-        end
+   if not hook.Call( "TTTKarmaGivePenalty", nil, ply, penalty, victim ) then
+      ply:SetLiveKarma(math.max(ply:GetLiveKarma() - penalty, 0))
+   end
+end
 
 -- NTH
 function KARMA.GivePenaltyRealtime(ply, penalty)
