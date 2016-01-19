@@ -91,3 +91,7 @@ GLMVS.AddToLibrary("ttt_minecraft_haven", {"Minecraft Haven"})
 GLMVS.AddToLibrary("ttt_nightfever", {"Night Fever"})
 GLMVS.AddToLibrary("ttt_parkhouse", {"Park House"})
 GLMVS.AddToLibrary("ttt_starfish_island_v1_2", {"Starfish Island"})
+
+GLMVS.AddToLibrary("de_thematrix", {"The Matrix"})
+
+

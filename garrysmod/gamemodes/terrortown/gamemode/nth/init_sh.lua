@@ -55,6 +55,6 @@ include("headline_sh.lua")
 include("map_mods_sh.lua")
 
 -- for Christmas
-MsgN("NTH is running in Christmas Mode")
-AddCSLuaFile("themes/xmas.lua")
-include("themes/xmas.lua")
+-- MsgN("NTH is running in Christmas Mode")
+-- AddCSLuaFile("themes/xmas.lua")
+-- include("themes/xmas.lua")
