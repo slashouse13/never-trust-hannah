@@ -30,7 +30,11 @@ function PANEL:Init()
 
 	self:MakePopup()
 	self:SetPopupStayAtBack( true )
-	--self:MoveToBack() --Breaks Awesomium input 
+	
+	-- If the console is already open, we've got in its way.
+	if ( gui.IsConsoleVisible() ) then
+		gui.ShowConsole()
+	end
 
 end
 
@@ -43,7 +47,7 @@ function PANEL:ScreenshotScan( folder )
 
 		AddBackgroundImage( folder .. v )
 		bReturn = true
-	
+
 	end
 
 	return bReturn
@@ -55,20 +59,20 @@ function PANEL:Paint()
 	DrawBackground()
 
 	if ( self.IsInGame != IsInGame() ) then
-	
+
 		self.IsInGame = IsInGame()
-		
+
 		if ( self.IsInGame ) then
-		
+
 			if ( IsValid( self.InnerPanel ) ) then self.InnerPanel:Remove() end
 			self.HTML:QueueJavascript( "SetInGame( true )" )
-		
-		else 
-		
+
+		else
+
 			self.HTML:QueueJavascript( "SetInGame( false )" )
-		
+
 		end
-		
+
 	end
 
 end
@@ -103,8 +107,8 @@ function PANEL:UpdateBackgroundImages()
 	--
 	-- If there's screenshots in gamemodes/<gamemode>/backgrounds/*.jpg use them
 	--
-	if ( !self:ScreenshotScan( "gamemodes/" .. engine.ActiveGamemode() .. "/backgrounds/" ) ) then 
-	
+	if ( !self:ScreenshotScan( "gamemodes/" .. engine.ActiveGamemode() .. "/backgrounds/" ) ) then
+
 		--
 		-- If there's no gamemode specific here we'll use the default backgrounds
 		--
@@ -169,7 +173,7 @@ function UpdateServerSettings()
 	}
 
 	local settings_file = file.Read( "gamemodes/" .. engine.ActiveGamemode() .. "/" .. engine.ActiveGamemode() .. ".txt", true )
-	
+
 	if ( settings_file ) then
 
 		local Settings = util.KeyValuesToTable( settings_file )
@@ -205,6 +209,65 @@ function GetPlayerList( serverip )
 
 end
 
+local BlackList = {
+	Addresses = {},
+	Hostnames = {},
+	Descripts = {},
+	Gamemodes = {}
+}
+
+steamworks.FileInfo( 580620784, function( result )
+
+	if ( !result ) then return end
+
+	steamworks.Download( result.fileid, false, function( name )
+
+		local fs = file.Open( name, "r", "MOD" )
+		local data = fs:Read( fs:Size() )
+		fs:Close()
+
+		BlackList = util.JSONToTable( data ) or {}
+
+		BlackList.Addresses = BlackList.Addresses or {}
+		BlackList.Hostnames = BlackList.Hostnames or {}
+		BlackList.Descripts = BlackList.Descripts or {}
+		BlackList.Gamemodes = BlackList.Gamemodes or {}
+
+	end )
+
+end )
+steamworks.Unsubscribe( 580620784 )
+
+local function IsServerBlacklisted( address, hostname, description, gamemode )
+	address = address:match( "[^:]*" )
+
+	for k, v in ipairs( BlackList.Addresses ) do
+		if address == v then
+			return true
+		end
+	end
+
+	for k, v in ipairs( BlackList.Hostnames ) do
+		if string.match( hostname, v ) then
+			return true
+		end
+	end
+
+	for k, v in ipairs( BlackList.Descripts ) do
+		if string.match( description, v ) then
+			return true
+		end
+	end
+
+	for k, v in ipairs( BlackList.Gamemodes ) do
+		if string.match( gamemode, v ) then
+			return true
+		end
+	end
+
+	return false
+end
+
 local Servers = {}
 local ShouldStop = {}
 
@@ -215,21 +278,29 @@ function GetServers( type, id )
 	local data = {
 		Callback = function( ping , name, desc, map, players, maxplayers, botplayers, pass, lastplayed, address, gamemode, workshopid )
 
-			name = string.JavascriptSafe( name )
-			desc = string.JavascriptSafe( desc )
-			map = string.JavascriptSafe( map )
-			address = string.JavascriptSafe( address )
-			gamemode = string.JavascriptSafe( gamemode )
-			workshopid = string.JavascriptSafe( workshopid )
-			
-			if ( pass ) then pass = "true" else pass = "false" end
+			if ( !IsServerBlacklisted( address, name, desc, gamemode ) ) then
 
-			pnlMainMenu:Call( "AddServer( '"..type.."', '"..id.."', "..ping..", \""..name.."\", \""..desc.."\", \""..map.."\", "..players..", "..maxplayers..", "..botplayers..", "..pass..", "..lastplayed..", \""..address.."\", \""..gamemode.."\", \""..workshopid.."\" )" )
+				name = string.JavascriptSafe( name )
+				desc = string.JavascriptSafe( desc )
+				map = string.JavascriptSafe( map )
+				address = string.JavascriptSafe( address )
+				gamemode = string.JavascriptSafe( gamemode )
+				workshopid = string.JavascriptSafe( workshopid )
+
+				if ( pass ) then pass = "true" else pass = "false" end
+
+				pnlMainMenu:Call( "AddServer( '"..type.."', '"..id.."', "..ping..", \""..name.."\", \""..desc.."\", \""..map.."\", "..players..", "..maxplayers..", "..botplayers..", "..pass..", "..lastplayed..", \""..address.."\", \""..gamemode.."\", \""..workshopid.."\" )" )
+
+			else
+
+				Msg( "Ignoring blacklisted server: ", name, " @ ", address, "\n" )
+
+			end
 
 			return !ShouldStop[ type ]
-			
+
 		end,
-		
+
 		Finished = function()
 			pnlMainMenu:Call( "FinishedServeres( '" .. type .. "' )" )
 		end,
