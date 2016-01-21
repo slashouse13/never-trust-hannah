@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/web"
+	"$surfaceprop" "foliage"
+	"$alphatest" 1
+}

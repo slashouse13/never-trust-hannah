@@ -1,0 +1,8 @@
+"WorldVertexTransition"
+{
+	"$basetexture" "tobyjk_PA/grass"
+	"$basetexture2" "tobyjk_PA/grass_dark"
+	"$surfaceprop" "Grass"
+	"$surfaceprop2" "Grass"
+	"%keywords" "prisonarchitect"
+}

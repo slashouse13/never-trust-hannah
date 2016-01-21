@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\crystal"
+    "$alphatest"    "1"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

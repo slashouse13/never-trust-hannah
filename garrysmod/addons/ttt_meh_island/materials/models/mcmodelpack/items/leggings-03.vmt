@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\leggings-03"
+    "$surfaceprop" "Mmetal"
+}

@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\pumpkin-side"
+    "$surfaceprop"  "Mpumpkin"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

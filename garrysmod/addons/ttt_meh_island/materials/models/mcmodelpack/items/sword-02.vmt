@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\sword-02"
+    "$surfaceprop" "Mmetal"
+}

@@ -1,0 +1,9 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tobyjk_PA/chainlink"
+	"$surfaceprop" "chainlink"
+	"%keywords" "prisonarchitect"
+	"%compileclip" 1
+	"$nodecal" 1
+	"$translucent" 1
+}

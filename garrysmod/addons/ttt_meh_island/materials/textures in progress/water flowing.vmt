@@ -1,0 +1,32 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "minecraft_original/water flowing"
+                    "$translucent" "1"
+        "$abovewater" 1   //This is what tell the water to be on top.
+                  	"$translucent" "1"
+           
+       	"%compilewater" 1 // to compile as water
+
+       	"$surfaceprop" "water" //for physics
+
+       	"$fogenable" 1 // set to 0 for no fog
+       	"$fogcolor" "[.39 .109 217]" // RGB setting for color of the fog. 0 is white 1 is black.
+       	"$fogstart" 0 // keep this a 0 or the fog will not look right
+       	"$fogend" 500 //larger the # the farther the fog will start from the player.
+       
+       	"$texoffset" "[0 0]" //These two lines help the water scroll.
+       	"$texscale" "0"
+
+       	"$bottommaterial" "minecraft_original/water flowing" //see below for waterunder.vmt
+       "Proxies"
+       {
+
+
+          "TextureScroll"
+          {
+             "texturescrollvar" "$baseTextureTransform"
+             "texturescrollrate" .80
+             "texturescrollangle" 0
+           }
+         }
+}

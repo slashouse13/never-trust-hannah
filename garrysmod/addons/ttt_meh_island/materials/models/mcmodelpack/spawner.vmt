@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\spawner"
+    "$alphatest"    "1"
+    "$surfaceprop"  "chainlink"
+}

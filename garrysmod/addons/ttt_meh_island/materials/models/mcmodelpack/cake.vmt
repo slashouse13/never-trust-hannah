@@ -1,0 +1,7 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\cake"
+    "$surfaceprop"  "Mcloth"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}
+// -The cake is a lie!
+// -Then why its so delicious and moist?

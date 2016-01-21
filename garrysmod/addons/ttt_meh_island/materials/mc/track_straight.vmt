@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$BaseTexture" "mc/track_straight"
+	"$surfaceprop" "wood"
+	"$translucent" 1
+}

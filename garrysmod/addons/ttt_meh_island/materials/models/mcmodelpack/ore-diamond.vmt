@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\ore-diamond"
+    "$surfaceprop"  "Mrock"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

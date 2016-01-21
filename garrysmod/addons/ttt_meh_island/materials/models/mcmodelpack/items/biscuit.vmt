@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\biscuit"
+    "$surfaceprop" "Mplastic"
+}

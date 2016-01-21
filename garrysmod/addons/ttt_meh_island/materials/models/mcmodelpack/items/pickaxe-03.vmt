@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\pickaxe-03"
+    "$surfaceprop" "Mmetal"
+}

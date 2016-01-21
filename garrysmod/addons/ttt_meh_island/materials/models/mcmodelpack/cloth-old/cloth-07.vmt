@@ -1,0 +1,6 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\cloth-old\cloth"
+    "$color2" "{109 173 235}"
+    "$surfaceprop" "Mcloth"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

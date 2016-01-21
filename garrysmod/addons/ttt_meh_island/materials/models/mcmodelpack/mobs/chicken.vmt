@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\mobs\chicken"
+    "$surfaceprop" "flesh"
+    "$nocull"      "1"
+}

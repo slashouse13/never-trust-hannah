@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$BaseTexture" "mc/glass"
+	"$surfaceprop" "glass"
+	"$translucent" 1
+}

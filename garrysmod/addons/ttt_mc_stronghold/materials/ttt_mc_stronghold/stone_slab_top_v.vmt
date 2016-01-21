@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/stone_slab_top"
+	"$surfaceprop" "concrete"
+}

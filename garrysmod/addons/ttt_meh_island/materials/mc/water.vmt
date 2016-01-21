@@ -1,0 +1,32 @@
+"LightmappedGeneric"
+{
+	"%tooltexture" "mc/water"
+	"%compilewater" "1"
+	"%compileKeepLight" "1"
+
+
+	"$basetexture" "mc/water"
+	"$surfaceprop" "water"
+	"$alpha" "0.9"
+
+	"$abovewater" "1"
+
+	"$fogenable" "1"
+	"$fogcolor" "{29 87 253}"
+	"$fogstart" "-400"
+	"$fogend" "1000"
+
+	"$bottommaterial" "mc/water"
+
+	"Proxies"
+{
+"AnimatedTexture"
+{
+"animatedtexturevar" "$basetexture"
+"animatedtextureframenumvar" "$frame"
+"animatedtextureframerate" 15.00
+}
+}
+}
+
+

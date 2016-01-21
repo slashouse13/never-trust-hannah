@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$BaseTexture" "mc/redstone_torch_off"
+	"$surfaceprop" "wood"
+}

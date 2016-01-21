@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\bottle"
+    "$surfaceprop" "Mglass"
+    "$alphatest"   "1"
+}

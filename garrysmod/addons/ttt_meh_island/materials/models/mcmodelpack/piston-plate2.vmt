@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\piston-plate2"
+    "$surfaceprop"  "Mslime"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

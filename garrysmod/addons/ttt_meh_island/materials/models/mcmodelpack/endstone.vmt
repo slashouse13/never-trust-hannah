@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\endstone"
+    "$surfaceprop"  "Mrock"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

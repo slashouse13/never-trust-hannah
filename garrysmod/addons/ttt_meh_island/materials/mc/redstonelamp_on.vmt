@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "mc/redstonelamp_on"
+	"$surfaceprop" "glass"
+}

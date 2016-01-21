@@ -1,0 +1,8 @@
+"patch"
+{
+	"include"		"materials/maps/gm_bigcity67d3/building_template/toxicslime002az_-7808_-5952_-10816.vmt"
+	"insert"
+	{
+		"$waterdepth"		"176"
+	}
+}

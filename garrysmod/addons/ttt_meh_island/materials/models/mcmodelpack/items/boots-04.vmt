@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\boots-04"
+    "$surfaceprop" "Mglass"
+}

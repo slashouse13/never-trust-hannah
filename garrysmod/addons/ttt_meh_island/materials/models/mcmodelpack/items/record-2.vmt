@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\record-2"
+    "$surfaceprop" "Mplastic"
+}

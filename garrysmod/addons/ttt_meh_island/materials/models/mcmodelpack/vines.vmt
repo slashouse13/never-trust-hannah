@@ -1,0 +1,7 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\vines"
+    "$surfaceprop" "Mfoliage"
+    "$alphatest"   "1"
+    "$nocull"      "1"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

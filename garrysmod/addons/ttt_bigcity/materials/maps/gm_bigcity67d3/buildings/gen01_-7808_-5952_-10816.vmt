@@ -1,0 +1,8 @@
+"patch"
+{
+	"include"		"materials/BUILDINGS/GEN01.vmt"
+	"replace"
+	{
+		"$envmap"		"maps/gm_bigcity67d3/c-7808_-5952_-10816"
+	}
+}

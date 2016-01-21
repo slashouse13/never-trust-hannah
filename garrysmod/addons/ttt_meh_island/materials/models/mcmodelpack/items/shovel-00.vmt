@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\shovel-00"
+    "$surfaceprop" "Mwood"
+}

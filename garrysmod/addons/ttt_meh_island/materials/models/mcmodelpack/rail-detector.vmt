@@ -1,0 +1,3 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\rail-detector"
+    "$surfaceprop" "Mwood"

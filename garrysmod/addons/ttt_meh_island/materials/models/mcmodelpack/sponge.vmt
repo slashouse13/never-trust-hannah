@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\sponge"
+    "$surfaceprop"  "Mcloth"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

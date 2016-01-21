@@ -1,0 +1,38 @@
+"LightmappedGeneric"
+{
+	"%tooltexture" "mc/portal"
+	"%compilewater" "1"
+	"%compileKeepLight" 1
+
+
+	"$basetexture" "mc/portal"
+	"$surfaceprop" "water"
+	"$alpha" "0.99"
+
+	"$abovewater" "1"
+
+	"$fogenable" 1
+	"$fogcolor" "{38 15 83}"
+	"$fogstart" "-400"
+	"$fogend" "1000"
+
+	"$bottommaterial" "mc/portal"
+
+	"Proxies"
+{
+"AnimatedTexture"
+{
+"animatedtexturevar" "$basetexture"
+"animatedtextureframenumvar" "$frame"
+"animatedtextureframerate" 15.00
+}
+
+"WaterLOD"
+		{
+		}
+}
+}
+
+
+
+

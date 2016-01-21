@@ -1,0 +1,15 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/tnt_side"
+	"$surfaceprop" "carpet"
+
+	"Proxies"
+	{
+		"AnimatedTexture"
+		{
+			"animatedtexturevar" "$basetexture"
+			"animatedtextureframenumvar" "$frame" 
+			"animatedtextureframerate" "3"
+		}
+	}
+}

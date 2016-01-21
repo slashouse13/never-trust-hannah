@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tobyjk_PA/drain"
+	"$surfaceprop" "MetalGrate"
+	"%keywords" "prisonarchitect"
+	"$nodecal" 1
+	"$translucent" 1
+}

@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/torch_on"
+	"$surfaceprop" "wood_plank"
+	"$selfillum" "1"
+}

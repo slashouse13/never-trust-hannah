@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\mobs\cape-translator"
+    "$surfaceprop" "Mcloth"
+}

@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "mc/dirt_grassside"
+	"$surfaceprop" "dirt"
+}

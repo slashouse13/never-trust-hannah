@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "mc/mushroom_brown"
+	"$surfaceprop" "foliage"
+   	"$translucent" "1"
+}

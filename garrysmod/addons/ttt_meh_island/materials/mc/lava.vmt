@@ -1,0 +1,36 @@
+"LightmappedGeneric"
+{
+	"%tooltexture" "mc/lava"
+	"%compilewater" "1"
+	"%compileKeepLight" 1
+
+
+	"$basetexture" "mc/lava"
+	"$surfaceprop" "water"
+	"$alpha" "1"
+
+	"$abovewater" "1"
+
+	"$fogenable" 1
+	"$fogcolor" "{251 3 1}"
+	"$fogstart" "-400"
+	"$fogend" "1000"
+
+	"$bottommaterial" "mc/lava"
+
+	"Proxies"
+{
+"AnimatedTexture"
+{
+"animatedtexturevar" "$basetexture"
+"animatedtextureframenumvar" "$frame"
+"animatedtextureframerate" 15.00
+}
+
+"WaterLOD"
+		{
+		}
+}
+}
+
+

@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$BaseTexture" "mc/ladder"
+	"$surfaceprop" "wood"
+	"$translucent" 1
+}

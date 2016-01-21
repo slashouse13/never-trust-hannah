@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\cactus-bottom"
+    "$surfaceprop"  "Mcloth"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/quartz_block_top"
+	"$surfaceprop" "ceiling_tile"
+}

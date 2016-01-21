@@ -1,0 +1,8 @@
+// envmaptint_fix
+"LightmappedGeneric"
+{
+	"$basetexture" "Metal/metalroof004a"
+	"$surfaceprop" "metal"
+	"%keywords" "c17industrial"
+	"$bumpmap" "Metal/metalroof004a_normal"
+}

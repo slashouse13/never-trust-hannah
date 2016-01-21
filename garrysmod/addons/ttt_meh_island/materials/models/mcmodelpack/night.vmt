@@ -1,0 +1,4 @@
+"unlitgeneric" {
+    "$basetexture" "models\MCModelPack\night"
+//    "$nocull"      "1"
+}

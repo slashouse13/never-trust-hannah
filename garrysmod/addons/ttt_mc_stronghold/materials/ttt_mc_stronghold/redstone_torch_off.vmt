@@ -1,0 +1,5 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/redstone_torch_off"
+	"$surfaceprop" "wood_plank"
+}

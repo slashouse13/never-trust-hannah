@@ -1,0 +1,8 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tobyjk_PA/crazy_tile"
+	"$basetexture2" "tobyjk_PA/dirt"
+	"$surfaceprop" "Boulder"
+	"$surfaceprop2" "Dirt"
+	"%keywords" "prisonarchitect"
+}

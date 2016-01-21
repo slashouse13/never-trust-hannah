@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\helm-02"
+    "$surfaceprop" "Mmetal"
+}

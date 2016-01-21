@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "maps/ttt_taiga_forest"
+	"$ignorez"		1
+	"$vertexcolor" 		1
+	"$vertexalpha" 		1
+}

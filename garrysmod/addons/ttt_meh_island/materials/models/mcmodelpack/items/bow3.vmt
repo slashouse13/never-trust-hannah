@@ -1,0 +1,4 @@
+"vertexlitgeneric" {
+    "$basetexture" "models\MCModelPack\items\bow3"
+    "$surfaceprop" "Mwood"
+}

@@ -1,0 +1,5 @@
+"vertexlitgeneric" {
+    "$basetexture"  "models\MCModelPack\glass-side"
+    "$surfaceprop"  "Mglass"
+    "$reflectivity" "[0.675 0.675 0.675]"
+}

@@ -1,0 +1,7 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "tobyjk_PA/metal_fence_chainlink"
+	"$surfaceprop" "MetalGrate"
+	"%keywords" "prisonarchitect"
+	"$translucent" 1
+}

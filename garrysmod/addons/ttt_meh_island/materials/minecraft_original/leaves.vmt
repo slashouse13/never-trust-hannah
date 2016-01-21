@@ -1,0 +1,6 @@
+"LightmappedGeneric"
+{
+	"$basetexture" "minecraft_original/leaves"
+	"$surfaceprop" "Grass"
+	"$translucent" 0
+}

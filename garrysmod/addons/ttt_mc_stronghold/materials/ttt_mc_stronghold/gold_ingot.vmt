@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "ttt_mc_stronghold/gold_ingot"
+	"$surfaceprop" "solidmetal"
+}

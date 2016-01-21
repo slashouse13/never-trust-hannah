@@ -1,0 +1,33 @@
+"LightMappedGeneric"
+{
+	"%tooltexture" "eNnerGy\Minecraft\lava"
+	"%compilewater" "1"
+	"%compileKeepLight" 1
+
+	"$basetexture"	"eNnerGy\Minecraft\lava"
+	"$surfaceprop" "water"
+
+	"$abovewater" "1"
+
+	"$fogenable" 1
+	"$fogcolor" "{219 63 0}"
+	"$fogstart" "-400"
+	"$fogend" "1000"
+	"$bottommaterial" "eNnerGy/Minecraft/lava"
+
+	"Proxies"
+{
+"AnimatedTexture"
+{
+"animatedTextureVar" "$basetexture"
+"animatedTextureFrameNumVar" "$frame"
+"animatedTextureFrameRate" "15.0"
+}
+"TextureScroll"
+		{
+			"texturescrollvar"	"$basetexturetransform"
+			"texturescrollrate"	"1"
+			"texturescrollangle"	"0"
+		}
+}
+}
