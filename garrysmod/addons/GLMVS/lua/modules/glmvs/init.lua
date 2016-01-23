@@ -55,7 +55,7 @@ Desc: Finds if the map exists or not.
 Returns: inversedFileExists (bool)
 -----------------------------------------------------------]]
 function IsNonExistentMap( map )
-	return not file.Exists( "maps/" ..map.. ".bsp", "MOD" )
+	return not file.Exists( "maps/" ..map.. ".bsp", "GAME" )
 end
 
 --[[---------------------------------------------------------

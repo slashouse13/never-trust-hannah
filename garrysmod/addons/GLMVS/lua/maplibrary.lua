@@ -1,13 +1,13 @@
 /* ----------------------------------------------------------------------------------------
-	GLMVS - Map Library System
+    GLMVS - Map Library System
 
-	This file is to add the library of all the maps you're registering for,
-	it uses a super easy format for everyone to follow and contribute for
-	GLMVS. It is undesirable to add maps you're not going to use for the library.
-	But you can add as many as you please (until lua hangs itself).
+    This file is to add the library of all the maps you're registering for,
+    it uses a super easy format for everyone to follow and contribute for
+    GLMVS. It is undesirable to add maps you're not going to use for the library.
+    But you can add as many as you please (until lua hangs itself).
 
-	Format to add maps in the library:
-	GLMVS.AddToLibrary( mapname, [plreq], { realname, author, description } )
+    Format to add maps in the library:
+    GLMVS.AddToLibrary( mapname, [plreq], { realname, author, description } )
 ---------------------------------------------------------------------------------------- */
 
 GLMVS.AddToLibrary("de_dolls", {"Dolls"})
@@ -58,7 +58,7 @@ GLMVS.AddToLibrary("ttt_bb_canalwarehousev2_r3", {"Canal Warehouse"})
 GLMVS.AddToLibrary("ttt_bb_outpost57_b5", {"Outpost 57"})
 GLMVS.AddToLibrary("ttt_bb_suburbia_b3", {"Suburbia"})
 GLMVS.AddToLibrary("ttt_bb_teenroom_b2", {"Teen Room"})
-GLMVS.AddToLibrary("ttt_bunker", {"Bunker"})
+-- GLMVS.AddToLibrary("ttt_bunker", {"Bunker"})
 GLMVS.AddToLibrary("ttt_camel_v1", {"Camel"})
 GLMVS.AddToLibrary("ttt_casino_b2", {"Casino"})
 GLMVS.AddToLibrary("ttt_christmastown", {"Christmas Town"})
@@ -93,5 +93,55 @@ GLMVS.AddToLibrary("ttt_parkhouse", {"Park House"})
 GLMVS.AddToLibrary("ttt_starfish_island_v1_2", {"Starfish Island"})
 
 GLMVS.AddToLibrary("de_thematrix", {"The Matrix"})
+
+GLMVS.AddToLibrary("ttt_airboatcity",             {"Airboat City"})
+GLMVS.AddToLibrary("ttt_allan_ye",                {"Allan Ye"})
+GLMVS.AddToLibrary("ttt_arctic_hl2",              {"Arctic HL2"})
+GLMVS.AddToLibrary("ttt_ascend",                  {"Ascend"})
+GLMVS.AddToLibrary("ttt_blockcity_dd_a7",         {"Block City DD"})
+GLMVS.AddToLibrary("ttt_castle_black_v5",         {"Castle Black"})
+GLMVS.AddToLibrary("ttt_citadel",                 {"Citadel"})
+GLMVS.AddToLibrary("ttt_cquestt",                 {"CQuest"})
+GLMVS.AddToLibrary("ttt_crisis_v1",               {"Crisis"})
+GLMVS.AddToLibrary("ttt_cybercity_v3m9",          {"Cyber City"})
+GLMVS.AddToLibrary("ttt_dharmaville_v1",          {"Dharmaville"})
+GLMVS.AddToLibrary("ttt_digdown_b1",              {"Dig Down"})
+GLMVS.AddToLibrary("ttt_doom_gener_v2",           {"Doom"})
+GLMVS.AddToLibrary("ttt_eg_smugglers_sewer_ks",   {"EG Smugglers Sewer"})
+GLMVS.AddToLibrary("ttt_frg_vagiland_b1",         {"FRG Vagiland"})
+GLMVS.AddToLibrary("ttt_giant_daycare_fixed",     {"Giant Daycare"})
+GLMVS.AddToLibrary("ttt_goldenplixprison_v3",     {"Goldenplix Prison"})
+GLMVS.AddToLibrary("ttt_hardboys",                {"Hardboys"})
+GLMVS.AddToLibrary("ttt_hidamari_apartments_day", {"Hidamari Apartments"})
+GLMVS.AddToLibrary("ttt_lifetheroof",             {"Life the Roof"})
+GLMVS.AddToLibrary("ttt_lights_out",              {"Lights Out"})
+GLMVS.AddToLibrary("ttt_lookatthatview",          {"Look at that view!"})
+GLMVS.AddToLibrary("ttt_mc_plaza_v4",             {"Minecraft Plaza"})
+GLMVS.AddToLibrary("ttt_mc_port_labile_v3",       {"Minecraft Port Labile"})
+GLMVS.AddToLibrary("ttt_mc_poseidon",             {"Minecraft Poseidon"})
+GLMVS.AddToLibrary("ttt_mc_seriouscraft_b5",      {"Minecraft Seriouscraft"})
+GLMVS.AddToLibrary("ttt_mc_spooky",               {"Minecraft Spooky"})
+GLMVS.AddToLibrary("ttt_mc_stronghold",           {"Minecraft Stronghold"})
+GLMVS.AddToLibrary("ttt_mc_survival_v2",          {"Minecraft Survival"})
+GLMVS.AddToLibrary("ttt_mc_valley_v2",            {"Minecraft Valley"})
+GLMVS.AddToLibrary("ttt_minecraft_67thway_b5",    {"Minecraft 67thway"})
+GLMVS.AddToLibrary("ttt_minecraft_expedition",    {"Minecraft Expedition"})
+GLMVS.AddToLibrary("ttt_minecraft_redux",         {"Minecraft Redux"})
+GLMVS.AddToLibrary("ttt_minecraft_village_v1m6",  {"Minecraft Village"})
+GLMVS.AddToLibrary("ttt_mtndew",                  {"Mountain Dew!"})
+GLMVS.AddToLibrary("ttt_museum_heist_v6",         {"Museum Heist"})
+GLMVS.AddToLibrary("ttt_nuclear_power_b2",        {"Nuclear Power"})
+GLMVS.AddToLibrary("ttt_pinkvilla_b1",            {"Pink Villa"})
+GLMVS.AddToLibrary("ttt_riverside_b3",            {"Riverside"})
+GLMVS.AddToLibrary("ttt_rooftops_2016_v1",        {"Rooftops 2016"})
+GLMVS.AddToLibrary("ttt_sands",                   {"Sands"})
+GLMVS.AddToLibrary("ttt_snowtown_001e",           {"Snowtown"})
+GLMVS.AddToLibrary("ttt_space_street_67_b2",      {"Space Street"})
+GLMVS.AddToLibrary("ttt_stardestroyer_v2",        {"Star Destroyer"})
+GLMVS.AddToLibrary("ttt_sunday_street_b2fix",     {"Sunday Street"})
+GLMVS.AddToLibrary("ttt_taiga_forest",            {"Taiga Forest"})
+GLMVS.AddToLibrary("ttt_the_room_d",              {"The Room"})
+GLMVS.AddToLibrary("ttt_towers_a3",               {"Towers"})
+GLMVS.AddToLibrary("ttt_trainstation_a5",         {"Train Station"})
 
 
