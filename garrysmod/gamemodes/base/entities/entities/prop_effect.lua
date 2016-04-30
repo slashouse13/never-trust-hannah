@@ -7,17 +7,8 @@ end
 
 ENT.Type = "anim"
 
-ENT.PrintName		= ""
-ENT.Author			= ""
-ENT.Contact			= ""
-ENT.Purpose			= ""
-ENT.Instructions	= ""
-ENT.Spawnable		= false
-ENT.AdminOnly		= false
+ENT.Spawnable = false
 
---[[---------------------------------------------------------
-	Name: Initialize
------------------------------------------------------------]]
 function ENT:Initialize()
 
 	local Radius = 6
@@ -41,6 +32,7 @@ function ENT:Initialize()
 
 		-- Don't use the model's physics - create a box instead
 		self:PhysicsInitBox( min, max )
+		self:SetSolid( SOLID_VPHYSICS )
 
 		-- Set up our physics object here
 		local phys = self:GetPhysicsObject()
@@ -68,10 +60,6 @@ function ENT:Initialize()
 
 end
 
-
---[[---------------------------------------------------------
-	Name: Draw
------------------------------------------------------------]]
 function ENT:Draw()
 
 	if ( GetConVarNumber( "cl_draweffectrings" ) == 0 ) then return end
@@ -83,7 +71,7 @@ function ENT:Draw()
 
 	local weapon_name = wep:GetClass()
 
-	if ( weapon_name != "weapon_physgun" && weapon_name != "weapon_physcannon" && weapon_name != "gmod_tool" ) then 
+	if ( weapon_name != "weapon_physgun" && weapon_name != "weapon_physcannon" && weapon_name != "gmod_tool" ) then
 		return
 	end
 
@@ -92,10 +80,6 @@ function ENT:Draw()
 
 end
 
-
---[[---------------------------------------------------------
-	Name: PhysicsUpdate
------------------------------------------------------------]]
 function ENT:PhysicsUpdate( physobj )
 
 	if ( CLIENT ) then return end
@@ -110,10 +94,6 @@ function ENT:PhysicsUpdate( physobj )
 
 end
 
-
---[[---------------------------------------------------------
-	Name: Called after entity 'copy'
------------------------------------------------------------]]
 function ENT:OnEntityCopyTableFinish( tab )
 
 	-- We need to store the model of the attached entity
@@ -131,10 +111,6 @@ function ENT:OnEntityCopyTableFinish( tab )
 
 end
 
-
---[[---------------------------------------------------------
-	Name: PostEntityPaste
------------------------------------------------------------]]
 function ENT:PostEntityPaste( ply )
 
 	-- Restore the attached entity using the information we've saved

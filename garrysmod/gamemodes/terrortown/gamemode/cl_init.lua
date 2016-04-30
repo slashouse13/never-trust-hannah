@@ -157,7 +157,7 @@ local function ReceiveRole()
    if not client.SetRole then return end
 
    client:SetRole(role)
-   
+
    --[[ NTH - Commented this out. TMI
    Msg("You are: ")
    if client:IsTraitor() then MsgN("TRAITOR")
@@ -370,3 +370,24 @@ end
 
 -- NTH - Now seems like a good place to inject the Never Trust Hannah stuff
 include("nth/init_cl.lua")
+function GM:OnEntityCreated(ent)
+   -- Make ragdolls look like the player that has died
+   if ent:IsRagdoll() then
+      local ply = CORPSE.GetPlayer(ent)
+
+      if IsValid(ply) then
+         -- Only copy any decals if this ragdoll was recently created
+         if ent:GetCreationTime() > CurTime() - 1 then
+            ent:SnatchModelInstance(ply)
+         end
+
+         -- Copy the color for the PlayerColor matproxy
+         local playerColor = ply:GetPlayerColor()
+         ent.GetPlayerColor = function()
+            return playerColor
+         end
+      end
+   end
+
+   return self.BaseClass.OnEntityCreated(self, ent)
+end

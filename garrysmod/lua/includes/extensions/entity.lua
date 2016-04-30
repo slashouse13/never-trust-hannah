@@ -141,9 +141,6 @@ end
 
 hook.Add( "EntityRemoved", "DoDieFunction", DoDieFunction )
 
---[[---------------------------------------------------------
-	Name: PhysWake
------------------------------------------------------------]]
 function meta:PhysWake()
 
 	local phys = self:GetPhysicsObject()
@@ -393,7 +390,11 @@ function meta:InstallDataTable()
 			if ( tab[ k ] == nil ) then continue end
 
 			-- Set it.
-			ent[ "Set" .. k ]( ent, tab[ k ] )
+			if ( ent[ "Set" .. k ] ) then
+				ent[ "Set" .. k ]( ent, tab[ k ] )
+			else
+				v.SetFunc( ent, v.index, tab[k] )
+			end
 
 		end
 
@@ -454,9 +455,9 @@ function meta:InstallDataTable()
 
 			if ( !IsValid( ent ) ) then return end
 			if ( !isfunction( ent.GetEditingData ) ) then return end
+			if ( ent.AdminOnly && !client:IsAdmin() ) then return end
 
 			local key = net.ReadString()
-
 
 			-- Is this key in our edit table?
 			local editor = ent:GetEditingData()[ key ]

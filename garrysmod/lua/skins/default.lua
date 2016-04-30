@@ -453,16 +453,9 @@ function SKIN:PaintTextEntry( panel, w, h )
 		end
 	
 	end
-	
-	panel:DrawTextEntryText( panel.m_colText, panel.m_colHighlight, panel.m_colCursor )
 
-end
 
-function SKIN:SchemeTextEntry( panel ) ---------------------- TODO
-
-	panel:SetTextColor( self.colTextEntryText )
-	panel:SetHighlightColor( self.colTextEntryTextHighlight )
-	panel:SetCursorColor( self.colTextEntryTextCursor )
+	panel:DrawTextEntryText( panel:GetTextColor(), panel:GetHighlightColor(), panel:GetCursorColor() )
 
 end
 
@@ -789,7 +782,7 @@ end
 function SKIN:PaintNumberUp( panel, w, h )
 
 	if ( panel:GetDisabled() ) then
-		return self.Input.UpDown.Up.Disabled( 0, 0, w, h )
+		return self.tex.Input.UpDown.Up.Disabled( 0, 0, w, h )
 	end
 	
 	if ( panel.Depressed ) then
