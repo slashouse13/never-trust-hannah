@@ -23,10 +23,12 @@ AddCSLuaFile("vips_cl.lua")
 AddCSLuaFile("achievement_banner_cl.lua")
 AddCSLuaFile("achievements_cl.lua")
 AddCSLuaFile("hitmark_cl.lua")
+
+--AddCSLuaFile("toys/pepsi.lua")
 AddCSLuaFile("customskins_cl.lua")
 
 -- Let's get busy
-CreateConVar("nth_vip_min_players", 5)
+CreateConVar("nth_vip_min_players", 2)
 CreateConVar("nth_achi_liveonly", 1)
 
 include("init_sh.lua") -- NTH core stuff
@@ -37,7 +39,7 @@ include("vips_sh.lua") -- VIP stuff
 include("vips_sv.lua") -- VIP spawning hooks
 include("achievements_sv.lua")
 
-include("toys/pepsi.lua")
+--include("toys/pepsi.lua")
 
 concommand.Add("nth_pos", function(ply,cmd,args)
     local p = ply:GetPos()

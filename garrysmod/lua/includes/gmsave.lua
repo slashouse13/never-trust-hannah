@@ -1,7 +1,15 @@
 
 gmsave = {}
 
-if ( CLIENT ) then return end
+if ( CLIENT ) then
+
+	hook.Add( "LoadGModSaveFailed", "LoadGModSaveFailed", function( str )
+		Derma_Message( str, "Failed to load save!", "OK" )
+	end )
+
+	return
+
+end
 
 include( "gmsave/entity_filters.lua" )
 include( "gmsave/player.lua" )
@@ -35,32 +43,32 @@ function gmsave.LoadMap( strMapContents, ply )
 		MsgN( "gm_load: Couldn't decode from json!" )
 		return false
 	end
-	
+
 	game.CleanUpMap()
-	
+
 	if ( IsValid( ply ) ) then
 
 		ply:SendLua( "hook.Run( \"OnSpawnMenuClose\" )" )
 
 		g_WavSound = g_WavSound + 1
 		if ( g_WavSound > 4 ) then g_WavSound = 1 end
-	
+
 		ply:SendLua( "surface.PlaySound( \"garrysmod/save_load" .. g_WavSound .. ".wav\" )" )
 
-		gmsave.PlayerLoad( ply, tab.Player ) 
+		gmsave.PlayerLoad( ply, tab.Player )
 
 	end
 
-	timer.Simple( 0.1, function() 
+	timer.Simple( 0.1, function()
 
-			DisablePropCreateEffect = true
-			duplicator.RemoveMapCreatedEntities()
-			duplicator.Paste( ply, tab.Entities, tab.Constraints )
-			DisablePropCreateEffect = nil
+		DisablePropCreateEffect = true
+		duplicator.RemoveMapCreatedEntities()
+		duplicator.Paste( ply, tab.Entities, tab.Constraints )
+		DisablePropCreateEffect = nil
 
-			if ( IsValid( ply ) ) then
-				gmsave.PlayerLoad( ply, tab.Player ) 
-			end
+		if ( IsValid( ply ) ) then
+			gmsave.PlayerLoad( ply, tab.Player )
+		end
 
 	end )
 
@@ -72,7 +80,7 @@ function gmsave.SaveMap( ply )
 
 	for k, v in pairs( Ents ) do
 
-		if ( !gmsave.ShouldSaveEntity( v, v:GetSaveTable() ) || v:IsConstraint()  ) then
+		if ( !gmsave.ShouldSaveEntity( v, v:GetSaveTable() ) || v:IsConstraint() ) then
 			Ents[ k ] = nil
 		end
 

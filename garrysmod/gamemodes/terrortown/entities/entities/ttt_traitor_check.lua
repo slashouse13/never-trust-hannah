@@ -19,25 +19,16 @@ function ENT:CountTraitors()
    local mins = self:LocalToWorld(self:OBBMins())
    local maxs = self:LocalToWorld(self:OBBMaxs())
 
-   -- NTH
-   local playersInside = {}
-   
    local trs = 0
-   for _,ply in pairs(player.GetAll()) do
-	  if not IsValid(ply) then continue end
-	  local pos = ply:GetPos()
-      if VectorInside(pos, mins, maxs) then
-         table.insert(playersInside, ply)
-         if ply:TraitorTest() then
+   for _,ply in ipairs(player.GetAll()) do
+      if IsValid(ply) and ply:IsActiveTraitor() and ply:Alive() then
+         local pos = ply:GetPos()
+         if VectorInside(pos, mins, maxs) then
             trs = trs + 1
          end
       end
    end
 
-   local trs2 = hook.Call("NTH-TC-CountTraitors", nil, self, trs, playersInside)
-   if trs2 != nil then return trs2 end
-   -- /NTH
-   
    return trs
 end
 
@@ -45,12 +36,7 @@ function ENT:AcceptInput(name, activator, caller)
    if name == "CheckForTraitor" then
       local traitors = self:CountTraitors()
 
-      -- hack in our parameter
-      for idx, op in pairs(self.Outputs["TraitorsFound"]) do
-         op.param = traitors
-      end
-
-      self:TriggerOutput("TraitorsFound", activator)
+      self:TriggerOutput("TraitorsFound", activator, traitors)
 
       return true
    end

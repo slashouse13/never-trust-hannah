@@ -1,13 +1,13 @@
 
-local function UpdateWebsite(event, data)
-    NTH.WEB(
-        "realtime-report/"..event,
-        data,
-        function()
-            print("Updated Website: " .. event)
-        end
-    )
-end
+-- local function UpdateWebsite(event, data)
+--     -- NTH.WEB(
+--     --     "realtime-report/"..event,
+--     --     data,
+--     --     function()
+--     --         print("Updated Website: " .. event)
+--     --     end
+--     -- )
+-- end
 
 local function WebPlayerInfo(p)
     local pinfo = {
@@ -51,11 +51,11 @@ local function WebRoundInfo()
 end
 
 local function UpdateWebsiteRoundInfo()
-    UpdateWebsite("info", WebRoundInfo())
+    -- UpdateWebsite("info", WebRoundInfo())
 end
 
 local function UpdateWebsitePlayerInfo(ply)
-    UpdateWebsite("player", WebPlayerInfo(ply))
+    -- UpdateWebsite("player", WebPlayerInfo(ply))
 end
 
 hook.Add("NTHIdentBody",        "NW-NTHIdentBody",          UpdateWebsitePlayerInfo) -- does this hook exist?

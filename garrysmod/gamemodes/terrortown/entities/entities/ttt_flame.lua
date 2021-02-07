@@ -3,15 +3,12 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
---ENT.Model = Model("models/Gibs/metal_gib4.mdl")
 ENT.Model = Model("models/weapons/w_eq_flashbang_thrown.mdl")
 
 AccessorFunc(ENT, "dmgparent", "DamageParent")
 
 AccessorFunc(ENT, "die_explode", "ExplodeOnDeath")
 AccessorFunc(ENT, "dietime", "DieTime")
-AccessorFunc(ENT, "damage_override", "DamageOverride") -- NTH
-AccessorFunc(ENT, "damage_radius", "DamageRadius") -- NTH
 
 AccessorFuncDT(ENT, "burning", "Burning")
 
@@ -21,8 +18,6 @@ ENT.fireparams = {size=120, growth=1}
 ENT.dietime = 0
 ENT.next_hurt = 0
 ENT.hurt_interval = 1
-ENT.damage_override = 0 -- NTH - set fire damage
-ENT.damage_radius = 132 -- NTH - damage radius
 
 CreateConVar("ttt_fire_fallback", "0", FCVAR_ARCHIVE)
 
@@ -58,6 +53,8 @@ function StartFires(pos, tr, num, lifetime, explode, dmgowner)
    for i=1, num do
       local ang = Angle(-math.Rand(0, 180), math.Rand(0, 360), math.Rand(0, 360))
 
+      local vstart = pos + tr.HitNormal * 64
+
       local flame = ents.Create("ttt_flame")
       flame:SetPos(pos)
       if IsValid(dmgowner) and dmgowner:IsPlayer() then
@@ -66,8 +63,6 @@ function StartFires(pos, tr, num, lifetime, explode, dmgowner)
       end
       flame:SetDieTime(CurTime() + lifetime + math.Rand(-2, 2))
       flame:SetExplodeOnDeath(explode)
-      flame:SetDamageOverride(0) -- NTH
-      flame:SetDamageRadius(132) -- NTH
 
       flame:Spawn()
       flame:PhysWake()
@@ -81,7 +76,7 @@ function StartFires(pos, tr, num, lifetime, explode, dmgowner)
       end
 
    end
-   
+
 end
 
 function SpawnFire(pos, size, attack, fuel, owner, parent)
@@ -97,7 +92,7 @@ function SpawnFire(pos, size, attack, fuel, owner, parent)
    fire:SetKeyValue("fireattack", attack)
    fire:SetKeyValue("health", fuel)
    fire:SetKeyValue("damagescale", "-10") -- only neg. value prevents dmg
-   
+
    fire:Spawn()
    fire:Activate()
 
@@ -107,10 +102,8 @@ end
 -- greatly simplified version of SDK's game_shard/gamerules.cpp:RadiusDamage
 -- does no block checking, radius should be very small
 function RadiusDamage(dmginfo, pos, radius, inflictor)
-   local victims = ents.FindInSphere(pos, radius)
-
    local tr = nil
-   for k, vic in pairs(victims) do
+   for k, vic in ipairs(ents.FindInSphere(pos, radius)) do
       if IsValid(vic) and inflictor:Visible(vic) then
          if vic:IsPlayer() and vic:Alive() and vic:Team() == TEAM_TERROR then
             vic:TakeDamageInfo(dmginfo)
@@ -178,20 +171,15 @@ function ENT:Think()
 
          local dmg = DamageInfo()
          dmg:SetDamageType(DMG_BURN)
-         -- NTH
-         if self.damage_override > 0 then
-            dmg:SetDamage(self.damage_override)
-         else
-            dmg:SetDamage(math.random(4,6))
-         end
+         dmg:SetDamage(math.random(4,6))
          if IsValid(self:GetDamageParent()) then
             dmg:SetAttacker(self:GetDamageParent())
          else
             dmg:SetAttacker(self)
          end
          dmg:SetInflictor(self.firechild)
-         
-         RadiusDamage(dmg, self:GetPos(), self.damage_radius, self)
+
+         RadiusDamage(dmg, self:GetPos(), 132, self)
 
          self.next_hurt = CurTime() + self.hurt_interval
       end

@@ -10,8 +10,8 @@ NTHC.DamageLogsDB = {
 NTHC.DB = {
     enabled     = true,              -- record stats to DB
     ip          = '127.0.0.1',
-    username    = '',
-    password    = '',
+    username    = 'root',
+    password    = 'cameron89',
     database    = 'nth'
 }
 

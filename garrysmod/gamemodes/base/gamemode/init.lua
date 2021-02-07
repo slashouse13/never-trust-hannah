@@ -4,8 +4,6 @@ include( 'player.lua' )
 include( 'npc.lua' )
 include( 'variable_edit.lua' )
 
-GM.PlayerSpawnTime = {}
-
 --[[---------------------------------------------------------
    Name: gamemode:Initialize()
    Desc: Called immediately after starting the gamemode
@@ -57,10 +55,25 @@ function GM:DoPlayerDeath( ply, attacker, dmginfo )
 end
 
 --[[---------------------------------------------------------
+   Name: gamemode:PlayerShouldTakeDamage
+   Return true if this player should take damage from this attacker
+-----------------------------------------------------------]]
+function GM:PlayerShouldTakeDamage( ply, attacker )
+	return true
+end
+
+--[[---------------------------------------------------------
    Name: gamemode:EntityTakeDamage( ent, info )
    Desc: The entity has received damage
 -----------------------------------------------------------]]
 function GM:EntityTakeDamage( ent, info )
+end
+
+--[[---------------------------------------------------------
+   Name: gamemode:PlayerHurt( )
+   Desc: Called when a player is hurt.
+-----------------------------------------------------------]]
+function GM:PlayerHurt( player, attacker, healthleft, healthtaken )
 end
 
 --[[---------------------------------------------------------
@@ -91,7 +104,7 @@ function GM:ShowTeam( ply )
 	if ( ply.LastTeamSwitch && RealTime() - ply.LastTeamSwitch < TimeBetweenSwitches ) then
 		ply.LastTeamSwitch = ply.LastTeamSwitch + 1
 		ply:ChatPrint( Format( "Please wait %i more seconds before trying to change team again", ( TimeBetweenSwitches - ( RealTime() - ply.LastTeamSwitch ) ) + 1 ) )
-		return false
+		return
 	end
 	
 	-- For clientside see cl_pickteam.lua
@@ -113,7 +126,7 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 
 		-- The joining clients password doesn't match sv_password
 		if ( server_password != password ) then
-			return false, "#GameUI_ServerRejectBadPassword"
+			return false
 		end
 
 	end
@@ -122,5 +135,31 @@ function GM:CheckPassword( steamid, networkid, server_password, password, name )
 	-- Returning true means they're allowed to join the server
 	--
 	return true
+
+end
+
+--[[---------------------------------------------------------
+   Name: gamemode:FinishMove( player, movedata )
+-----------------------------------------------------------]]
+function GM:VehicleMove( ply, vehicle, mv )
+
+	--
+	-- On duck toggle third person view
+	--
+	if ( mv:KeyPressed( IN_DUCK ) && vehicle.SetThirdPersonMode ) then
+		vehicle:SetThirdPersonMode( !vehicle:GetThirdPersonMode() )
+	end
+
+	--
+	-- Adjust the camera distance with the mouse wheel
+	--
+	local iWheel = ply:GetCurrentCommand():GetMouseWheel()
+	if ( iWheel != 0 && vehicle.SetCameraDistance ) then
+		-- The distance is a multiplier
+		-- Actual camera distance = ( renderradius + renderradius * dist )
+		-- so -1 will be zero.. clamp it there.
+		local newdist = math.Clamp( vehicle:GetCameraDistance() - iWheel * 0.03 * ( 1.1 + vehicle:GetCameraDistance() ), -1, 10 )
+		vehicle:SetCameraDistance( newdist )
+	end
 
 end

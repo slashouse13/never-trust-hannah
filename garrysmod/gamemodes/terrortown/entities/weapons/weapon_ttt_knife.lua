@@ -28,7 +28,7 @@ SWEP.ViewModel          = "models/weapons/cstrike/c_knife_t.mdl"
 SWEP.WorldModel         = "models/weapons/w_knife_t.mdl"
 
 SWEP.DrawCrosshair      = false
-SWEP.Primary.Damage         = 500 -- NTH
+SWEP.Primary.Damage         = 2000 -- NTH
 SWEP.Primary.ClipSize       = -1
 SWEP.Primary.DefaultClip    = -1
 SWEP.Primary.Automatic      = true
@@ -51,6 +51,7 @@ SWEP.IsSilent = true
 SWEP.DeploySpeed = 2
 
 function SWEP:PrimaryAttack()
+   print("knife attack!")
    self.Weapon:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
    self.Weapon:SetNextSecondaryFire( CurTime() + self.Secondary.Delay )
 
@@ -276,7 +277,7 @@ end
 if CLIENT then
    function SWEP:DrawHUD()
       local tr = self.Owner:GetEyeTrace(MASK_SHOT)
-
+      print (tr.HitNonWorld and IsValid(tr.Entity) and tr.Entity:IsPlayer())
       if tr.HitNonWorld and IsValid(tr.Entity) and tr.Entity:IsPlayer()
          and tr.Entity:Health() < (self.Primary.Damage + 10) then
 

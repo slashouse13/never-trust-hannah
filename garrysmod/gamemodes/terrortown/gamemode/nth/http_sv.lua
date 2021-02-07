@@ -75,28 +75,29 @@ end
 
 
 -- Make a call to the NTH website
-NTH.WEB = function(func, dataTable, cb)
-    if not NTHC.Web.enabled then
-        return cb("NTH.WEB is disabled")
-    end
-    NTH.HTTP({
-        url			= NTHC.Web.endpoint .. func,
-        method		= "post",
-        parameters	= {data = util.TableToJSON(dataTable)},
-        success		= function( code, body, headers )
-            if code >= 400 then
-                return cb and cb(code or true, body)
-            end
+-- NTH.WEB = function(func, dataTable, cb)
+--     if not NTHC.Web.enabled then
+--         return cb("NTH.WEB is disabled")
+--     end
+--     NTH.HTTP({
+--         url			= NTHC.Web.endpoint .. func,
+--         method		= "post",
+--         parameters	= {data = util.TableToJSON(dataTable)},
+--         success		= function( code, body, headers )
+--             if code >= 400 then
+--                 return cb and cb(code or true, body)
+--             end
         
-            local json = util.JSONToTable(body)
-            if json == nil then
-                return cb and cb("Invalid JSON", body)
-            end
+--             local json = util.JSONToTable(body)
+--             if json == nil then
+--                 return cb and cb("Invalid JSON", body)
+--             end
             
-            return cb and cb(nil, json)
-        end,
-        failed		= function( err )
-            return cb and cb(err or true)
-        end
-    })
-end
+--             return cb and cb(nil, json)
+--         end,
+--         failed		= function( err )
+--             return cb and cb(err or true)
+--         end
+--     })
+-- end
+NTH.WEB = nil

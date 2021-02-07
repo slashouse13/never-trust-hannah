@@ -2,52 +2,48 @@
 
 AddCSLuaFile()
 
-SWEP.HoldReady = "grenade"
-SWEP.HoldNormal = "slam"
+DEFINE_BASECLASS "weapon_tttbase"
+
+SWEP.HoldReady             = "grenade"
+SWEP.HoldNormal            = "slam"
 
 if CLIENT then
+   SWEP.PrintName          = "Incendiary grenade"
+   SWEP.Instructions       = "Burn."
+   SWEP.Slot               = 3
 
-   SWEP.PrintName			= "Incendiary grenade"
-   SWEP.Instructions		= "Burn."
-   SWEP.Slot				= 3
-   SWEP.SlotPos			= 0
+   SWEP.ViewModelFlip      = true
+   SWEP.DrawCrosshair      = false
 
-
-   SWEP.Icon = "vgui/ttt/icon_nades"
+   SWEP.Icon               = "vgui/ttt/icon_nades"
 end
 
-SWEP.Base				= "weapon_tttbase"
+SWEP.Base                  = "weapon_tttbase"
 
-SWEP.Kind = WEAPON_NADE
+SWEP.ViewModel             = "models/weapons/v_eq_flashbang.mdl"
+SWEP.WorldModel            = "models/weapons/w_eq_flashbang.mdl"
 
-SWEP.ViewModel			= "models/weapons/v_eq_flashbang.mdl"
-SWEP.WorldModel			= "models/weapons/w_eq_flashbang.mdl"
-SWEP.Weight			= 5
+SWEP.Weight                = 5
+SWEP.AutoSwitchFrom        = true
+SWEP.NoSights              = true
 
-SWEP.ViewModelFlip = true
-SWEP.AutoSwitchFrom		= true
+SWEP.Primary.ClipSize      = -1
+SWEP.Primary.DefaultClip   = -1
+SWEP.Primary.Automatic     = false
+SWEP.Primary.Delay         = 1.0
+SWEP.Primary.Ammo          = "none"
 
-SWEP.DrawCrosshair		= false
+SWEP.Secondary.ClipSize    = -1
+SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.Automatic   = false
+SWEP.Secondary.Ammo        = "none"
 
-SWEP.Primary.ClipSize		= -1
-SWEP.Primary.DefaultClip	= -1
-SWEP.Primary.Automatic		= false
-SWEP.Primary.Delay = 1.0
-SWEP.Primary.Ammo		= "none"
-SWEP.Secondary.ClipSize		= -1
-SWEP.Secondary.DefaultClip	= -1
-SWEP.Secondary.Automatic	= false
-SWEP.Secondary.Ammo		= "none"
+SWEP.Kind                  = WEAPON_NADE
+SWEP.IsGrenade             = true
 
-SWEP.IsGrenade = true
-SWEP.NoSights = true
-
-SWEP.was_thrown = false
-SWEP.was_cooked = false -- NTH
-
-SWEP.detonate_timer = 5
-
-SWEP.DeploySpeed = 1.5
+SWEP.was_thrown            = false
+SWEP.detonate_timer        = 5
+SWEP.DeploySpeed           = 1.5
 
 AccessorFunc(SWEP, "det_time", "DetTime")
 
@@ -74,7 +70,7 @@ end
 function SWEP:PullPin()
    if self:GetPin() then return end
 
-   local ply = self.Owner
+   local ply = self:GetOwner()
    if not IsValid(ply) then return end
 
    self:SendWeaponAnim(ACT_VM_PULLPIN)
@@ -90,7 +86,8 @@ end
 
 
 function SWEP:Think()
-   local ply = self.Owner
+   BaseClass.Think(self)
+   local ply = self:GetOwner()
    if not IsValid(ply) then return end
 
    -- pin pulled and attack loose = throw
@@ -103,14 +100,12 @@ function SWEP:Think()
          self:SendWeaponAnim(ACT_VM_THROW)
 
          if SERVER then
-            self.Owner:SetAnimation( PLAYER_ATTACK1 )
+            self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
          end
       else
          -- still cooking it, see if our time is up
          if SERVER and self:GetDetTime() < CurTime() then
-            self.was_cooked = true -- NTH
             self:BlowInFace()
-            hook.Call("NTH-BaseGrenade-CookedInFace", GAMEMODE, self) -- NTH
          end
       end
    elseif self:GetThrowTime() > 0 and self:GetThrowTime() < CurTime() then
@@ -120,7 +115,7 @@ end
 
 
 function SWEP:BlowInFace()
-   local ply = self.Owner
+   local ply = self:GetOwner()
    if not IsValid(ply) then return end
 
    if self.was_thrown then return end
@@ -147,7 +142,7 @@ function SWEP:Throw()
    if CLIENT then
       self:SetThrowTime(0)
    elseif SERVER then
-      local ply = self.Owner
+      local ply = self:GetOwner()
       if not IsValid(ply) then return end
 
       if self.was_thrown then return end
@@ -192,7 +187,6 @@ function SWEP:CreateGrenade(src, ang, vel, angimp, ply)
    --   gren:SetVelocity(vel)
    gren:SetOwner(ply)
    gren:SetThrower(ply)
-   gren:SetCooked(self.was_cooked) -- NTH
 
    gren:SetGravity(0.4)
    gren:SetFriction(0.2)
@@ -259,11 +253,10 @@ function SWEP:Initialize()
    self:SetPin(false)
 
    self.was_thrown = false
-   self.was_cooked = false -- NTH
 end
 
 function SWEP:OnRemove()
-   if CLIENT and IsValid(self.Owner) and self.Owner == LocalPlayer() and self.Owner:Alive() then
+   if CLIENT and IsValid(self:GetOwner()) and self:GetOwner() == LocalPlayer() and self:GetOwner():Alive() then
       RunConsoleCommand("use", "weapon_ttt_unarmed")
    end
 end

@@ -7,7 +7,6 @@ ENT.Model = Model("models/weapons/w_eq_flashbang_thrown.mdl")
 
 
 AccessorFunc( ENT, "thrower", "Thrower")
-AccessorFunc( ENT, "cooked", "Cooked") -- NTH
 
 function ENT:SetupDataTables()
    self:NetworkVar("Float", 0, "ExplodeTime")

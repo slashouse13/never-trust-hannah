@@ -10,7 +10,7 @@ timer.Create("NTH-Achi-20-SadFatDragan", 60, 0, function()
     local players = player.GetHumans()
     local humans = {}
     for _,ply in pairs(players) do
-        if IsValid(ply) and not ply:IsBot() and ply:SteamID() != "BOT" then
+        if IsValid(ply) and not ply:IsBot() and ply:SteamID() ~= "BOT" then
             table.insert(humans, ply);
         end
     end

@@ -20,7 +20,7 @@ function PANEL:Init()
    self.cols = {}
    self:AddColumn( GetTranslation("sb_ping"), function(ply) return ply:Ping() end )
    self:AddColumn( GetTranslation("sb_deaths"), function(ply) return ply:Deaths() end )
-   self:AddColumn( GetTranslation("sb_score"), function(ply) return ply:GetNTHScore() end )
+   -- self:AddColumn( GetTranslation("sb_score"), function(ply) return ply:GetNTHScore() end )
    self:AddColumn( "Rank", function(ply) return ply:GetRankName() end )
 
    if KARMA.IsEnabled() then

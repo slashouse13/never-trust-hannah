@@ -53,27 +53,27 @@ function PANEL:Init()
         hook.Remove(event, uid)
     end)
     
-    ghtml:AddFunction( "GHTML", "GetURL", function(cbid, url)
-        hook.Call(cbid, nil, url)
-    end)
+    -- ghtml:AddFunction( "GHTML", "GetURL", function(cbid, url)
+    --     hook.Call(cbid, nil, url)
+    -- end)
 
 end
 
-function PANEL:GetOpenURL(callback)
-    GetOpenURLCallback = GetOpenURLCallback + 1
-    local cbid = "GHTML-GetOpenURLCallback-" .. GetOpenURLCallback
-    hook.Add(cbid, cbid, function(url)
-        callback(url)
-        hook.Remove(cbid, cbid)
-    end)
-    self:QueueJavascript('GHTML.GetURL(\'' .. cbid .. '\', window.location.href);')
-end
+-- function PANEL:GetOpenURL(callback)
+--     GetOpenURLCallback = GetOpenURLCallback + 1
+--     local cbid = "GHTML-GetOpenURLCallback-" .. GetOpenURLCallback
+--     hook.Add(cbid, cbid, function(url)
+--         callback(url)
+--         hook.Remove(cbid, cbid)
+--     end)
+--     self:QueueJavascript('GHTML.GetURL(\'' .. cbid .. '\', window.location.href);')
+-- end
 
-function PANEL:RemoveJSHooks()
-    for _,h in pairs(self.jsHooks) do
-        hook.Remove(h[1], h[2])
-    end
-end
+-- function PANEL:RemoveJSHooks()
+--     for _,h in pairs(self.jsHooks) do
+--         hook.Remove(h[1], h[2])
+--     end
+-- end
 
 function PANEL:Paint() end
 

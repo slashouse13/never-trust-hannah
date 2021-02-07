@@ -1,35 +1,23 @@
---[[   _                                
-	( )                               
-   _| |   __   _ __   ___ ___     _ _ 
- /'_` | /'__`\( '__)/' _ ` _ `\ /'_` )
-( (_| |(  ___/| |   | ( ) ( ) |( (_| |
-`\__,_)`\____)(_)   (_) (_) (_)`\__,_) 
-
-	DFrame
-	
-	A window.
-
---]]
 
 local PANEL = {}
 
-AccessorFunc( PANEL, "m_bIsMenuComponent", 		"IsMenu", 			FORCE_BOOL )
-AccessorFunc( PANEL, "m_bDraggable", 			"Draggable", 		FORCE_BOOL )
-AccessorFunc( PANEL, "m_bSizable", 				"Sizable", 			FORCE_BOOL )
-AccessorFunc( PANEL, "m_bScreenLock", 			"ScreenLock", 		FORCE_BOOL )
-AccessorFunc( PANEL, "m_bDeleteOnClose", 		"DeleteOnClose", 	FORCE_BOOL )
-AccessorFunc( PANEL, "m_bPaintShadow", 			"PaintShadow", 		FORCE_BOOL )
+AccessorFunc( PANEL, "m_bIsMenuComponent",	"IsMenu",			FORCE_BOOL )
+AccessorFunc( PANEL, "m_bDraggable",		"Draggable",		FORCE_BOOL )
+AccessorFunc( PANEL, "m_bSizable",			"Sizable",			FORCE_BOOL )
+AccessorFunc( PANEL, "m_bScreenLock",		"ScreenLock",		FORCE_BOOL )
+AccessorFunc( PANEL, "m_bDeleteOnClose",	"DeleteOnClose",	FORCE_BOOL )
+AccessorFunc( PANEL, "m_bPaintShadow",		"PaintShadow",		FORCE_BOOL )
 
-AccessorFunc( PANEL, "m_iMinWidth", 			"MinWidth" )
-AccessorFunc( PANEL, "m_iMinHeight", 			"MinHeight" )
+AccessorFunc( PANEL, "m_iMinWidth",			"MinWidth",			FORCE_NUMBER )
+AccessorFunc( PANEL, "m_iMinHeight",		"MinHeight",		FORCE_NUMBER )
 
-AccessorFunc( PANEL, "m_bBackgroundBlur", 		"BackgroundBlur", 	FORCE_BOOL )
+AccessorFunc( PANEL, "m_bBackgroundBlur",	"BackgroundBlur",	FORCE_BOOL )
 
 function PANEL:Init()
 
 	self:SetFocusTopLevel( true )
 
---	self:SetCursor( "sizeall" )
+	--self:SetCursor( "sizeall" )
 
 	self:SetPaintShadow( true )
 
@@ -86,6 +74,12 @@ function PANEL:ShowCloseButton( bShow )
 
 end
 
+function PANEL:GetTitle()
+
+	return self.lblTitle:GetText()
+
+end
+
 function PANEL:SetTitle( strTitle )
 
 	self.lblTitle:SetText( strTitle )
@@ -105,13 +99,13 @@ function PANEL:Close()
 end
 
 function PANEL:OnClose()
-
 end
 
 function PANEL:Center()
 
 	self:InvalidateLayout( true )
-	self:SetPos( ScrW()/2 - self:GetWide()/2, ScrH()/2 - self:GetTall()/2 )
+	self:CenterVertical()
+	self:CenterHorizontal()
 
 end
 
@@ -142,8 +136,8 @@ end
 
 function PANEL:Think()
 
-	local mousex = math.Clamp( gui.MouseX(), 1, ScrW()-1 )
-	local mousey = math.Clamp( gui.MouseY(), 1, ScrH()-1 )
+	local mousex = math.Clamp( gui.MouseX(), 1, ScrW() - 1 )
+	local mousey = math.Clamp( gui.MouseY(), 1, ScrH() - 1 )
 
 	if ( self.Dragging ) then
 
@@ -168,8 +162,8 @@ function PANEL:Think()
 		local y = mousey - self.Sizing[2]
 		local px, py = self:GetPos()
 
-		if ( x < self.m_iMinWidth ) then x = self.m_iMinWidth elseif ( x > ScrW() - px and self:GetScreenLock() ) then x = ScrW() - px end
-		if ( y < self.m_iMinHeight ) then y = self.m_iMinHeight elseif ( y > ScrH() - py and self:GetScreenLock() ) then y = ScrH() - py end
+		if ( x < self.m_iMinWidth ) then x = self.m_iMinWidth elseif ( x > ScrW() - px && self:GetScreenLock() ) then x = ScrW() - px end
+		if ( y < self.m_iMinHeight ) then y = self.m_iMinHeight elseif ( y > ScrH() - py && self:GetScreenLock() ) then y = ScrH() - py end
 
 		self:SetSize( x, y )
 		self:SetCursor( "sizenwse" )
@@ -177,16 +171,16 @@ function PANEL:Think()
 
 	end
 
-	if ( self.Hovered && self.m_bSizable &&
-		 mousex > ( self.x + self:GetWide() - 20 ) &&
-		 mousey > ( self.y + self:GetTall() - 20 ) ) then
+	local screenX, screenY = self:LocalToScreen( 0, 0 )
+
+	if ( self.Hovered && self.m_bSizable && mousex > ( screenX + self:GetWide() - 20 ) && mousey > ( screenY + self:GetTall() - 20 ) ) then
 
 		self:SetCursor( "sizenwse" )
 		return
 
 	end
 
-	if ( self.Hovered && self:GetDraggable() && mousey < ( self.y + 24 ) ) then
+	if ( self.Hovered && self:GetDraggable() && mousey < ( screenY + 24 ) ) then
 		self:SetCursor( "sizeall" )
 		return
 	end
@@ -213,19 +207,15 @@ end
 
 function PANEL:OnMousePressed()
 
-	if ( self.m_bSizable ) then
+	local screenX, screenY = self:LocalToScreen( 0, 0 )
 
-		if ( gui.MouseX() > ( self.x + self:GetWide() - 20 ) &&
-			gui.MouseY() > ( self.y + self:GetTall() - 20 ) ) then
-
-			self.Sizing = { gui.MouseX() - self:GetWide(), gui.MouseY() - self:GetTall() }
-			self:MouseCapture( true )
-			return
-		end
-
+	if ( self.m_bSizable && gui.MouseX() > ( screenX + self:GetWide() - 20 ) && gui.MouseY() > ( screenY + self:GetTall() - 20 ) ) then
+		self.Sizing = { gui.MouseX() - self:GetWide(), gui.MouseY() - self:GetTall() }
+		self:MouseCapture( true )
+		return
 	end
 
-	if ( self:GetDraggable() && gui.MouseY() < (self.y + 24) ) then
+	if ( self:GetDraggable() && gui.MouseY() < ( screenY + 24 ) ) then
 		self.Dragging = { gui.MouseX() - self.x, gui.MouseY() - self.y }
 		self:MouseCapture( true )
 		return
@@ -254,13 +244,13 @@ function PANEL:PerformLayout()
 	end
 
 	self.btnClose:SetPos( self:GetWide() - 31 - 4, 0 )
-	self.btnClose:SetSize( 31, 31 )
+	self.btnClose:SetSize( 31, 24 )
 
 	self.btnMaxim:SetPos( self:GetWide() - 31 * 2 - 4, 0 )
-	self.btnMaxim:SetSize( 31, 31 )
+	self.btnMaxim:SetSize( 31, 24 )
 
 	self.btnMinim:SetPos( self:GetWide() - 31 * 3 - 4, 0 )
-	self.btnMinim:SetSize( 31, 31 )
+	self.btnMinim:SetSize( 31, 24 )
 
 	self.lblTitle:SetPos( 8 + titlePush, 2 )
 	self.lblTitle:SetSize( self:GetWide() - 25 - titlePush, 20 )

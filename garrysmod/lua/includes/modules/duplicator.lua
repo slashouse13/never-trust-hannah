@@ -49,14 +49,14 @@ local PhysicsObject =
 
 		end
 
+		-- Let's not Wake or put anything to sleep for now
+		--[[
 		if ( data.Sleep ) then
-			-- Make it sleep in the next frame so the entity has time to set up the bones
-			timer.Simple( 0, function()
-				if ( IsValid( phys ) ) then phys:Sleep() end
-			end )
+			if ( IsValid( phys ) ) then phys:Sleep() end
 		else
 			phys:Wake()
 		end
+		]]
 
 		if ( data.Frozen ) then
 
@@ -89,7 +89,7 @@ local EntityPhysics =
 		for objectid = 0, num-1 do
 	
 			local obj = Entity:GetPhysicsObjectNum( objectid )
-			if ( !obj:IsValid() ) then continue end
+			if ( !IsValid( obj ) ) then continue end
 
 			data[ objectid ] = {}
 			PhysicsObject.Save( data[ objectid ], obj )
@@ -214,10 +214,10 @@ local EntitySaver =
 				local p = ent:GetManipulateBonePosition( i )
 			
 				if ( s != Vector( 1, 1, 1 ) ) then t[ 's' ] = s end -- scale
-				if ( a != Angle( 0, 0, 0 ) ) then t[ 'a' ] = a end -- angle
-				if ( p != Vector( 0, 0, 0 ) ) then t[ 'p' ] = p end -- position
+				if ( a != angle_zero ) then t[ 'a' ] = a end -- angle
+				if ( p != vector_origin ) then t[ 'p' ] = p end -- position
 		
-				if ( table.Count( t ) > 0 ) then
+				if ( !table.IsEmpty( t ) ) then
 					data.BoneManip[ i ] = t
 				end
 		
@@ -244,7 +244,7 @@ local EntitySaver =
 		--
 		for k, v in pairs( data ) do
 
-			if ( isfunction(v) ) then
+			if ( isfunction( v ) ) then
 				data[k] = nil
 			end
 
@@ -262,7 +262,10 @@ local EntitySaver =
 	Load = function( data, ent )
 
 		if ( !data ) then return end
-		if ( data.Model ) then ent:SetModel( data.Model ) end
+
+		-- We do the second check for models because apparently setting the model on an NPC causes some position changes
+		-- And to prevent NPCs going into T-pose briefly upon duplicating
+		if ( data.Model && data.Model != ent:GetModel() ) then ent:SetModel( data.Model ) end
 		if ( data.Angle ) then ent:SetAngles( data.Angle ) end
 		if ( data.Pos ) then ent:SetPos( data.Pos ) end
 		if ( data.Skin ) then ent:SetSkin( data.Skin ) end
@@ -319,7 +322,7 @@ function SetLocalPos( v ) LocalPos = v * 1 end
 function SetLocalAng( v ) LocalAng = v * 1 end
 
 --[[---------------------------------------------------------
-   Register a constraint to be duplicated
+	Register a constraint to be duplicated
 -----------------------------------------------------------]]
 function RegisterConstraint( _name_ , _function_, ... )	
 
@@ -333,7 +336,7 @@ end
 EntityClasses = EntityClasses or {}
 
 --[[---------------------------------------------------------
-   Register an entity's class, to allow it to be duplicated
+	Register an entity's class, to allow it to be duplicated
 -----------------------------------------------------------]]
 function RegisterEntityClass( _name_ , _function_, ... )
 
@@ -771,13 +774,14 @@ function Paste( Player, EntityList, ConstraintList )
 	-- Create constraints
 	--
 	for k, Constraint in pairs( ConstraintList ) do
-	
-		local Entity = CreateConstraintFromTable( Constraint, CreatedEntities )
-		
-		if ( Entity && Entity:IsValid() ) then
+
+		local Entity = nil
+		ProtectedCall( function() Entity = CreateConstraintFromTable( Constraint, CreatedEntities ) end )
+
+		if ( IsValid( Entity ) ) then
 			table.insert( CreatedConstraints, Entity )
 		end
-	
+
 	end
 
 	ActionPlayer = oldplayer

@@ -58,9 +58,9 @@ include("player_ext.lua")
 include("player.lua")
 
 CreateConVar("ttt_roundtime_minutes", "10", FCVAR_NOTIFY)
-CreateConVar("ttt_preptime_seconds", "30", FCVAR_NOTIFY)
-CreateConVar("ttt_posttime_seconds", "30", FCVAR_NOTIFY)
-CreateConVar("ttt_firstpreptime", "60")
+CreateConVar("ttt_preptime_seconds", "10", FCVAR_NOTIFY)
+CreateConVar("ttt_posttime_seconds", "15", FCVAR_NOTIFY)
+CreateConVar("ttt_firstpreptime", "15")
 
 local ttt_haste = CreateConVar("ttt_haste", "1", FCVAR_NOTIFY)
 CreateConVar("ttt_haste_starting_minutes", "5", FCVAR_NOTIFY)
@@ -95,6 +95,7 @@ CreateConVar("ttt_det_credits_traitordead", "1")
 CreateConVar("ttt_announce_deaths", "1", FCVAR_ARCHIVE + FCVAR_NOTIFY)
 
 CreateConVar("ttt_use_weapon_spawn_scripts", "1")
+CreateConVar("ttt_weapon_spawn_count", "0")
 
 CreateConVar("ttt_always_use_mapcycle", "0")
 

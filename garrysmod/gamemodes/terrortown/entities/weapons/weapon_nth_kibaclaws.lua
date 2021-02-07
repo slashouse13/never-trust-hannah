@@ -234,4 +234,4 @@ SWEP.VElements = {
 	["r.index.hook+++++"] = { type = "Model", model = "models/balloons/balloon_classicheart.mdl", bone = "v_weapon.Left_Hand", rel = "", pos = Vector(0.453, 0.173, -1.167), angle = Angle(0.085, -84.231, -73.25), size = Vector(0.082, 0.082, 0.082), color = Color(255, 214, 251, 255), surpresslightning = false, material = "models/barnacle/roots", skin = 0, bodygroup = {} }
 }
 
-sck.init(SWEP)
+

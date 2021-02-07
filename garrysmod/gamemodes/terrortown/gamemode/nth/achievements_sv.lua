@@ -144,7 +144,7 @@ function AchiMeta:progressSet(ply, key, value, prereqs)
     -- does this complete the progression path for this achievement?
     local complete = true
     for k,v in pairs(self.ProgressPath) do
-        if self.AchiProgress[ply][k] != v then
+        if self.AchiProgress[ply][k] ~= v then
             complete = false
         end
     end

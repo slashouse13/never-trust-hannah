@@ -73,8 +73,10 @@ end
 function RoundMeta:OnEnd(args)
 	if CLIENT and GetConVar("ttt_cl_nth_soundcues"):GetBool() then
 		if args.winType == WIN_TRAITOR then
+			print(args.winType)
 			NTH.Sound:Play(NTH.Sounds.MusicTWin)
 		else
+			print(args.winType)
 			NTH.Sound:Play(NTH.Sounds.MusicIWin)
 		end
 	end
@@ -185,7 +187,10 @@ if SERVER then
 		local roundsLeft = GetGlobalInt("ttt_rounds_left")
 		MsgC(COLOR_RED, "There are "..roundsLeft.." rounds left\n")
 		if roundsLeft == 1 then
+			--NTH.Rounds.dewdoritos:Activate()
 			GetRandomRDMRound():Activate()
+			--NTH.Rounds.meowoclock:Activate()
+
 			return
 		end
 		

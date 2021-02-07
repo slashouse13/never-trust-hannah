@@ -71,19 +71,29 @@ function ENT:AcceptInput(name, activator)
    end
 end
 
+function GAMEMODE:TTTCanUseTraitorButton(ent, ply)
+   -- Can be used to prevent players from using this button.
+   -- Return a boolean and a message that can shows up if you can't use the button.
+   -- Example: return false, "Not allowed".
+   return true
+end
+
 function ENT:TraitorUse(ply)
-   -- NTH
-   if not (IsValid(ply) and ply:CanUseTraitorButtons()) then return false end
+   if not (IsValid(ply) and ply:IsActiveTraitor()) then return false end
    if not self:IsUsable() then return false end
 
    if self:GetPos():Distance(ply:GetPos()) > self:GetUsableRange() then return false end
+
+   local use, message = hook.Run("TTTCanUseTraitorButton", self, ply)
+   if not use then
+      if message then TraitorMsg(ply, message) end
+      return false
+   end
 
    net.Start("TTT_ConfirmUseTButton") net.Send(ply)
 
    -- send output to all entities linked to us
    self:TriggerOutput("OnPressed", ply)
-   if self.OnPressed then self:OnPressed(ply) end -- NTH (easier way to add dynamic buttons)
-   hook.Call("NTH-TraitorButtonPressed", GAMEMODE, self, ply) -- NTH
 
    if self.RemoveOnPress then
       self:SetLocked(true)
@@ -93,18 +103,23 @@ function ENT:TraitorUse(ply)
       self:SetNextUseTime(CurTime() + self:GetDelay())
    end
 
+   hook.Run("TTTTraitorButtonActivated", self, ply)
    return true
+end
+
+-- Fix for traitor buttons having awkward init/render behavior, in the event that a map has been optimized with area portals.
+function ENT:UpdateTransmitState()
+   return TRANSMIT_ALWAYS
 end
 
 local function TraitorUseCmd(ply, cmd, args)
    if #args != 1 then return end
 
-   -- NTH
-   if IsValid(ply) and (ply:CanUseTraitorButtons()) then
+   if IsValid(ply) and ply:IsActiveTraitor() then
       local idx = tonumber(args[1])
       if idx then
          local ent = Entity(idx)
-         if IsValid(ent) and ent.TraitorUse then
+         if IsValid(ent) and ent:GetClass() == "ttt_traitor_button" and ent.TraitorUse then
             ent:TraitorUse(ply)
          end
       end

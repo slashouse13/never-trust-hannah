@@ -45,7 +45,7 @@ if SERVER then
         flame.fireparams = {size=500, growth=1}
         flame.next_hurt = CurTime()
         flame:SetDieTime(CurTime() + 500)
-        flame:SetDamageOverride(8)
+        flame:SetDamage(8)
         flame:SetDamageRadius(120)
 
         flame:SetParent(corpse)
@@ -148,9 +148,9 @@ for _,p in pairs(player.GetAll()) do p:Give("weapon_ttt_confgrenade") end
                 flame:SetPos(p:GetPos())
                 flame:SetDamageParent(p)
                 flame:SetOwner(p)
-                flame:SetDieTime(CurTime() + 1)
-                flame:SetDamageOverride(1)
-                flame:SetDamageRadius(44)
+                --flame:SetDieTime(CurTime() + 1)
+                --flame:SetDamage(8)
+                --flame:SetDamageRadius(44)
                 flame:Spawn()
                 flame.fireparams = {size=20, growth=1}
                 flame.next_hurt = CurTime()

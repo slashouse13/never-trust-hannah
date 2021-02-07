@@ -20,7 +20,7 @@ if SERVER then
             resource.AddFile(files[f])
         end
     end
-    
+
     NTH.GetPlayerBySteam64 = function(s64)
         for _,ply in pairs(player.GetAll()) do
             if IsValid(ply) and ply:IsPlayer() and ply:SteamID64(ply) == s64 then
@@ -41,7 +41,6 @@ AddCSLuaFile("sound_sh.lua")
 AddCSLuaFile("soundloop_sh.lua")
 AddCSLuaFile("headline_sh.lua")
 AddCSLuaFile("map_mods_sh.lua")
-AddCSLuaFile("suddendeath_sh.lua")
 
 if CLIENT then
     include("marquee_cl.lua")
@@ -54,9 +53,8 @@ include("sound_sh.lua")
 include("soundloop_sh.lua")
 include("headline_sh.lua")
 include("map_mods_sh.lua")
-include("suddendeath_sh.lua")
 
 -- for Christmas
---MsgN("NTH is running in Christmas Mode")
---AddCSLuaFile("themes/xmas.lua")
---include("themes/xmas.lua")
+-- MsgN("NTH is running in Christmas Mode")
+-- AddCSLuaFile("themes/xmas.lua")
+-- include("themes/xmas.lua")
